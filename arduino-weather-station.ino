@@ -10,11 +10,12 @@ const int p2 = 2; //Declara el pin del boton.
 const int p6 = 6; //Declara el pin del sensor DHT11.
 const int p8 = 8; //Declara el pin del sensor DS18B20.
 
-float actualTime, lastRead;
+unsigned long lastRead;
 int temp;
 int humedad;
 int contador;
-bool dataDisplay, primerSet;
+volatile bool dataDisplay;
+bool primerSet;
 
 float tempSensor1;
 
@@ -33,7 +34,6 @@ void setup() {
   sensorDS18B20.setResolution(sensor1, 9);
   dataDisplay = false;
   primerSet = true;
-  actualTime = 0;
   lastRead = 0; 
 
   Serial.begin(9600);
@@ -58,13 +58,12 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  if ((primerSet == true)||(actualTime >= 10)){
+  if ((primerSet == true)||(millis()-lastRead >= 10000)){
+    primerSet = false;  //Deshabilitamos el primer set del display.
     getTemperaturas(sensor1);
     showData();
-    lastRead = lastRead + actualTime;
-    primerSet = false;  //Deshabilitamos el primer set del display.
+    lastRead = millis();
   }
-  actualTime = millis()/1000-lastRead;
 }
 
 void printDataDS18B20()
@@ -74,7 +73,7 @@ void printDataDS18B20()
     lcd.setCursor(0,0);
     lcd.print("Error dev DS18B20");
     
-    Serial.println("ºC");
+    Serial.println("Error dev DS18B20");
     
   } else {
     lcd.clear();
@@ -116,7 +115,7 @@ void setDataDisplay(){
   dataDisplay = !dataDisplay;
   Serial.print("Variable dataDisplay: ");
   Serial.println(dataDisplay);
-  //showData();
+  showData();
   delay(600);
 }
 
