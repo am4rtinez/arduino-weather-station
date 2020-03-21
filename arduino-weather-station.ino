@@ -15,7 +15,7 @@ int temp;
 int humedad;
 int contador;
 volatile bool dataDisplay;
-bool primerSet;
+bool forzarPrint;
 
 float tempSensor1;
 
@@ -33,7 +33,7 @@ void setup() {
   sensorDS18B20.begin(); //Inicializa el sensor DS18B20.
   sensorDS18B20.setResolution(sensor1, 9);
   dataDisplay = false;
-  primerSet = true;
+  forzarPrint = true;
   lastRead = 0; 
 
   Serial.begin(9600);
@@ -58,8 +58,8 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  if ((primerSet == true)||(millis()-lastRead >= 10000)){
-    primerSet = false;  //Deshabilitamos el primer set del display.
+  if ((forzarPrint == true)||(millis()-lastRead >= 10000)){
+    forzarPrint = false;  //Deshabilitamos el primer set del display.
     getTemperaturas(sensor1);
     showData();
     lastRead = millis();
@@ -113,9 +113,9 @@ void printDataDHT(){
 
 void setDataDisplay(){
   dataDisplay = !dataDisplay;
+  forzarPrint = true;
   Serial.print("Variable dataDisplay: ");
   Serial.println(dataDisplay);
-  showData();
   delay(600);
 }
 
