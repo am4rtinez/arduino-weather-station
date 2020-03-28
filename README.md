@@ -1,2 +1,41 @@
-# arduino-weather-station
+# Arduino-Weather-Station
 Proyecto arduino para controlar varios sensores para una estación meteorológica.
+---
+
+El proyecto tiene el objetivo de implementar una estación meteorológica. En una primera fase medirá temperatura, humedad, presión atmosférica y luminosidad. 
+
+> Hay que estudiar si es factible realizar una medición de la dirección y velocidad del viento (segunda fase). 
+
+Una vez implementada hay que recoger los datos desde una fuente externa como una RPi o el microserver ya implementado para otros menesteres (corriendo una debian sin entorno gráfico). 
+
+Para ello es necesario seleccionar el método de conexion Ardunio - RPi/Microserver (lo nombraremos DataCenter para abreviar). Por distancia parece conveniente utilzar el metodo de conexión Wi-Fi.
+
+Una vez resuelto el problema de comunicación hay que estudiar si las peticiones de datos las lanza DataCenter o Arduino es la encargada de lanzar los datos.
+
+Los datos obtenidos seran almacenados en una BD. MySQL o MariaDB (aun pendiente analizar si usar PSQL).
+
+Hay que intentar que una vez obtenidos los datos se realice un análisis de los mismos e incluso se puedan realizar pequeñas predicciones.
+
+> Queda pendiente añadir alguna mejora más como dirección del viento o velocidad del mismo.
+
+## Componentes
+
+Los componentes a utilizar para iniciar el proyecto:
+
+*Arduino UNO.
+*Sensor DHT22 (Temperatura y humedad).
+*Sensor BMP280 (Presión atmosférica).
+*Display LCD 16x2 conectado con I2C.
+*Botones.
+*Módulo Wi-Fi.
+*Caja impresa en 3D.
+*Chip para conexiones.
+
+---
+
+## Diseño inicial esquema montaje
+
+Diseñado con fritzig (esquema sobre el DHT11).
+
+![Imagen de idea_inicial](img/arduino-weather-station_bb.png)
+
