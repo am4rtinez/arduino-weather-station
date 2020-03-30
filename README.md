@@ -22,20 +22,23 @@ Hay que intentar que una vez obtenidos los datos se realice un análisis de los 
 
 Los componentes a utilizar para iniciar el proyecto:
 
-*Arduino UNO.
-*Sensor DHT22 (Temperatura y humedad).
-*Sensor BMP280 (Presión atmosférica).
-*Display LCD 16x2 conectado con I2C.
-*Botones.
-*Módulo Wi-Fi.
-*Caja impresa en 3D.
-*Chip para conexiones.
+* Arduino UNO / Arduino Nano (una vez el proyecto sea viable).
+* Sensor DHT22 (Temperatura y humedad).
+* Sensor BMP280 (Presión atmosférica).
+* Display LCD 16x2 conectado con I2C.
+* Botones.
+* Módulo Wi-Fi.
+* Caja impresa en 3D.
+* Chip para conexiones.
+* Protoboard (Hasta que quede montado en chip).
 
 ---
 
-## Diseño inicial esquema montaje
+## Diseño esquema montaje
 
-Diseñado con fritzig (esquema sobre el DHT11).
+> Pendiente de modificar y/o añadir componentes segun se vaya planteando el proyecto.
+
+Diseñado con fritzig.
 
 ![Imagen de idea_inicial](img/arduino-weather-station_bb.png)
 
