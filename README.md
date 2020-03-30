@@ -25,6 +25,7 @@ Los componentes a utilizar para iniciar el proyecto:
 * Arduino UNO / Arduino Nano (una vez el proyecto sea viable).
 * Sensor DHT22 (Temperatura y humedad).
 * Sensor BMP280 (Presión atmosférica).
+* Sensor LDR (Luminosidad).
 * Display LCD 16x2 conectado con I2C.
 * Botones.
 * Módulo Wi-Fi.
