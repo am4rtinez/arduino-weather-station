@@ -26,6 +26,7 @@ Los componentes a utilizar para iniciar el proyecto:
 * Sensor DHT22 (Temperatura y humedad).
 * Sensor BMP280 (Presión atmosférica).
 * Sensor LDR (Luminosidad).
+* Resistencias (220 Oms, 10K Oms, etc).
 * Display LCD 16x2 conectado con I2C.
 * Botones.
 * Módulo Wi-Fi.
