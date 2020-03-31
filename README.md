@@ -44,3 +44,20 @@ Diseñado con fritzig.
 
 ![Imagen de idea_inicial](img/arduino-weather-station_bb.png)
 
+## Diseño BBDD.
+
+El motor de BBDD utilizado es MariaDB. En este momento el server core es la versión 10.3.
+
+La BD contiene 3 tablas:
+
+* Temperature.
+* Preasure.
+* Humidity.
+
+Cada tabla comparte la misma estructura (3 campos de datos)  solo cambia el nombre del campo de datos.
+
+Campos:
+
+* ID - Tipo INT (auto incremental).
+* DATA - Tipo FLOAT (temperature, preasure, humidity).
+* DATE - Tipo TIMESTAMP (current_timestamp).
