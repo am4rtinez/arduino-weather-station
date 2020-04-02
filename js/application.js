@@ -5,25 +5,59 @@ $(document).ready(function(){
 	const url_preasure_query = 'http://localhost/query.php?query=preasure';
 
 	var options = {
+		legend: {
+            display: false,
+        },
 		scales:{
+			xAxes: [{
+				gridLines: {
+					borderDash: [2, 5],
+				},
+			}],
 			yAxes:[{
+				gridLines: {
+					display: false,
+				},
 				ticks:{
 					beginAtZero:true
 				}
 			}]
-		},       
+		},
+		fontFamily: "Montserrat",
+		color: '#FFFFFF',
+		showScale: false,
+	    scaleShowLabels: false,
+	    scaleShowGridLines : false,
+	    pointDot : false,
+	    pointDotRadius : 0,
+	    pointDotStrokeWidth : 0,
+	    pointHitDetectionRadius : 0,
+	    datasetStroke : true,
+	    datasetStrokeWidth : 3,
+	    datasetFill : true,       
     };	
 
-	getData(url_temp_query, "temperature", "tempChart");
-	getData(url_hum_query, "humidity", "humChart");
-	getData(url_preasure_query, "preasure", "preasureChart"); 	
+	getData(url_temp_query, "temperature", "tempChart", "#FF0000");
+	getData(url_hum_query, "humidity", "humChart", "#0000FF");
+	getData(url_preasure_query, "preasure", "preasureChart", "#00FF00"); 	
 
-    async function getData(url, labeling, chart_id){
+    async function getData(url, labeling, chart_id, color){
 	    var data = {
 			labels: [],
 			datasets: [{
-			label: labeling.charAt(0).toUpperCase() + labeling.slice(1),
-			data: []
+				label: labeling.charAt(0).toUpperCase() + labeling.slice(1),
+				borderColor: color,
+	            pointBorderColor: color,
+	            pointBackgroundColor: color,
+	            pointHoverBackgroundColor: "#80b6f4",
+	            pointHoverBorderColor: "#80b6f4",
+	            pointBorderWidth: 2,
+	            pointHoverRadius: 10,
+	            pointHoverBorderWidth: 1,
+	            pointRadius: 6,
+	            fill: false,
+	            borderWidth: 4,
+				data: []
 			}]
 		};   	
 		$.getJSON(url, function(result){
@@ -32,14 +66,15 @@ $(document).ready(function(){
 				var hours = rt.getHours() > 9 ? rt.getHours() : '0' + rt.getHours();
 				var minutes = rt.getMinutes() > 9 ? rt.getMinutes() : '0' + rt.getMinutes();
 				data.labels.push(hours + ':' + minutes);
-				data.datasets[0].data.push((Math.round(field[labeling] * 10) / 10));
+				data.datasets[0].data.push(field[labeling]);
 			});
 			printChart(chart_id, data);  
 		});
     };
 
     function printChart(item, data){
-		// Instantiate a new chart
+    	Chart.defaults.global.defaultFontFamily = "Montserrat";
+    	Chart.defaults.scale.gridLines.color = "#FFFFFF";
         var myLineChart = new Chart(document.getElementById(item).getContext("2d") , {
             type: "line",
             data: data,

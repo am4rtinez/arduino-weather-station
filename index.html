@@ -18,17 +18,40 @@
 	<script src="js/application.js"></script>
 </head>
 <body>
-	<header class="container text-center">
+	<header id="header" class="jumbotron text-center">
 		<h1>ArduWeather</h1>
 	</header>
 	<div class="container text-center">
-		<canvas id="tempChart"></canvas>
+		<div class="card">
+			<div class="card-header">
+				<h2>Temperatura</h2>
+			</div>
+			<div class="card-body">
+				<canvas id="tempChart"></canvas>
+			</div>
+		</div>
 	</div>
+	<br>
 	<div class="container text-center">
-		<canvas id="humChart"></canvas>
+		<div class="card">
+			<div class="card-header">
+				<h2>Humedad</h2>
+			</div>
+			<div class="card-body">
+				<canvas id="humChart"></canvas>
+			</div>
+		</div>
 	</div>
+	<br>
 	<div class="container text-center">
-		<canvas id="preasureChart"></canvas>
+		<div class="card">
+			<div class="card-header">
+				<h2>Presión Atmoférica</h2>
+			</div>
+			<div class="card-body">
+				<canvas id="preasureChart"></canvas>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

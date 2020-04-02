@@ -43,21 +43,21 @@ try
 			break; 
 			// Hace query de todos los datos.
 			case humidity:
-				$statement=$pdo->prepare("SELECT humidity, date from humidity LIMIT 20");
+				$statement=$pdo->prepare("SELECT * FROM (SELECT humidity, date from humidity ORDER BY date DESC LIMIT 20) Var1 ORDER BY date ASC");
 				$statement->execute();
 				$results=$statement->fetchAll(PDO::FETCH_ASSOC);
 				$json=json_encode($results);
 				echo $json;
 			break;
 			case preasure:
-				$statement=$pdo->prepare("SELECT preasure, date from preasure LIMIT 20");
+				$statement=$pdo->prepare("SELECT * FROM (SELECT preasure, date from preasure ORDER BY date DESC LIMIT 20) Var1 ORDER BY date ASC");
 				$statement->execute();
 				$results=$statement->fetchAll(PDO::FETCH_ASSOC);
 				$json=json_encode($results);
 				echo $json;
 			break;
 			default:
-				$statement=$pdo->prepare("SELECT temperature, date from temperature LIMIT 20");
+				$statement=$pdo->prepare("SELECT * FROM (SELECT temperature, date from temperature ORDER BY date DESC LIMIT 20) Var1 ORDER BY date ASC");
 				$statement->execute();
 				$results=$statement->fetchAll(PDO::FETCH_ASSOC);
 				$json=json_encode($results);
