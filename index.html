@@ -3,8 +3,32 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<!-- CSS customizated-->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<!--Libreria Chart.js-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+	<script src="js/application.js"></script>
 </head>
 <body>
-	<h1>Hola Mundo!</h1>
+	<header class="container text-center">
+		<h1>ArduWeather</h1>
+	</header>
+	<div class="container text-center">
+		<canvas id="tempChart"></canvas>
+	</div>
+	<div class="container text-center">
+		<canvas id="humChart"></canvas>
+	</div>
+	<div class="container text-center">
+		<canvas id="preasureChart"></canvas>
+	</div>
 </body>
 </html>
