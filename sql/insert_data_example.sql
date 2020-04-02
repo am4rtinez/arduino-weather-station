@@ -1,12 +1,117 @@
-INSERT INTO w_station.humidity
-(humidity, `date`)
-VALUES(40, current_timestamp());
+--Query SQL para insertar datos ficticios en la BBDD y poder hacer pruebas con ella. Es necesario añadir los datos para cada tipo.
 
-INSERT INTO w_station.preasure
-(preasure, `date`)
-VALUES(100, current_timestamp());
+--Inserta datos ficticios para humedad. Previamente vacia la tabla.
+TRUNCATE TABLE w_station.humidity;
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 01:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 02:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 03:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 04:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 05:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 06:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 07:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 08:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 09:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 10:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 11:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 12:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 13:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 14:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 15:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 16:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 17:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 18:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 19:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 20:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 21:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 22:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-02 23:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-03 00:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-03 01:00:00");
+INSERT INTO w_station.humidity (humidity, `date`) VALUES(xx, "2020-04-03 02:00:00");
 
-INSERT INTO w_station.temperature
-(temperature, `date`)
-VALUES(34.1, current_timestamp());
+--Inserta datos ficticios para presión atmosférica. Previamente vacia la tabla.
+TRUNCATE TABLE w_station.preasure;
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 01:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 02:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 03:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 04:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 05:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 06:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 07:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 08:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 09:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 10:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 11:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 12:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 13:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 14:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 15:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 16:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 17:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 18:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 19:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 20:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 21:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 22:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-02 23:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-03 00:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-03 01:00:00");
+INSERT INTO w_station.preasure (preasure, `date`) VALUES(xx, "2020-04-03 02:00:00");
 
+--Inserta datos ficticios para temperatura. Previamente vacia la tabla.
+TRUNCATE TABLE w_station.temperature;
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 01:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 02:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 03:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 04:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 05:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 06:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 07:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 08:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 09:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 10:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 11:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 12:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 13:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 14:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 15:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 16:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 17:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 18:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 19:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 20:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 21:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 22:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-02 23:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-03 00:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-03 01:00:00");
+INSERT INTO w_station.temperature (temperature, `date`) VALUES(xx, "2020-04-03 02:00:00");
+
+--Inserta datos ficticios para luminosidad. Previamente vacia la tabla.
+TRUNCATE TABLE w_station.brightness;
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(10, "2020-04-02 01:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(10, "2020-04-02 02:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(10, "2020-04-02 03:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(10, "2020-04-02 04:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(30, "2020-04-02 05:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(60, "2020-04-02 06:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(80, "2020-04-02 07:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(95, "2020-04-02 08:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(95, "2020-04-02 09:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(100, "2020-04-02 10:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(100, "2020-04-02 11:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(100, "2020-04-02 12:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(75, "2020-04-02 13:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(75, "2020-04-02 14:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(60, "2020-04-02 15:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(85, "2020-04-02 16:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(85, "2020-04-02 17:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(85, "2020-04-02 18:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(65, "2020-04-02 19:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(55, "2020-04-02 20:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(40, "2020-04-02 21:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(30, "2020-04-02 22:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(20, "2020-04-02 23:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(10, "2020-04-03 00:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(10, "2020-04-03 01:00:00");
+INSERT INTO w_station.brightness (brightness, `date`) VALUES(10, "2020-04-03 02:00:00");

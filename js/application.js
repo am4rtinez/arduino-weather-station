@@ -3,7 +3,8 @@ $(document).ready(function(){
 	const url_temp_query = 'http://localhost/query.php';
 	const url_hum_query = 'http://localhost/query.php?query=humidity';
 	const url_preasure_query = 'http://localhost/query.php?query=preasure';
-
+	const url_brightness_query = 'http://localhost/query.php?query=brightness';
+	
 	var options = {
 		legend: {
             display: false,
@@ -39,7 +40,8 @@ $(document).ready(function(){
 
 	getData(url_temp_query, "temperature", "tempChart", "#FF0000");
 	getData(url_hum_query, "humidity", "humChart", "#0000FF");
-	getData(url_preasure_query, "preasure", "preasureChart", "#00FF00"); 	
+	getData(url_preasure_query, "preasure", "preasureChart", "#00FF00");
+	getData(url_brightness_query, "brightness", "brightnessChart", "#FFFF04");
 
     async function getData(url, labeling, chart_id, color){
 	    var data = {

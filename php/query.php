@@ -18,7 +18,7 @@ try
         $pdo = new PDO($dsn, $username, $password, $opt);
 		switch($_GET['query']){
 			// Hace el query del dato más reciente de temperatura.
-			case last_temp:
+			case last_temperature:
 			    $statement=$pdo->prepare("SELECT temperature, date from temperature ORDER BY id DESC LIMIT 0,1");
 				$statement->execute();
 				$results=$statement->fetchAll(PDO::FETCH_ASSOC);
@@ -34,13 +34,20 @@ try
 				echo $json;
 			break;
 			// Hace el query del dato más reciente de temperatura.
-			case last_hum:
+			case last_humidity:
 			    $statement=$pdo->prepare("SELECT humidity, date from humidity ORDER BY id DESC LIMIT 0,1");
 				$statement->execute();
 				$results=$statement->fetchAll(PDO::FETCH_ASSOC);
 				$json=json_encode($results);
 				echo $json;
-			break; 
+			break;
+			case last_brightness:
+			    $statement=$pdo->prepare("SELECT brightness, date from brightness ORDER BY id DESC LIMIT 0,1");
+				$statement->execute();
+				$results=$statement->fetchAll(PDO::FETCH_ASSOC);
+				$json=json_encode($results);
+				echo $json;
+			break;  
 			// Hace query de todos los datos.
 			case humidity:
 				$statement=$pdo->prepare("SELECT * FROM (SELECT humidity, date from humidity ORDER BY date DESC LIMIT 20) Var1 ORDER BY date ASC");
@@ -51,6 +58,13 @@ try
 			break;
 			case preasure:
 				$statement=$pdo->prepare("SELECT * FROM (SELECT preasure, date from preasure ORDER BY date DESC LIMIT 20) Var1 ORDER BY date ASC");
+				$statement->execute();
+				$results=$statement->fetchAll(PDO::FETCH_ASSOC);
+				$json=json_encode($results);
+				echo $json;
+			break;
+			case brightness:
+				$statement=$pdo->prepare("SELECT * FROM (SELECT brightness, date from brightness ORDER BY date DESC LIMIT 20) Var1 ORDER BY date ASC");
 				$statement->execute();
 				$results=$statement->fetchAll(PDO::FETCH_ASSOC);
 				$json=json_encode($results);

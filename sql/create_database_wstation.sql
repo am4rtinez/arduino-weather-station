@@ -10,6 +10,8 @@ CREATE TABLE preasure (id INT PRIMARY KEY AUTO_INCREMENT, preasure FLOAT NOT NUL
 
 CREATE TABLE humidity (id INT PRIMARY KEY AUTO_INCREMENT, humidity FLOAT NOT NULL, date TIMESTAMP NOT NULL) ENGINE=InnoDB;
 
+CREATE TABLE brightness (id INT PRIMARY KEY AUTO_INCREMENT, brightness FLOAT NOT NULL, date TIMESTAMP NOT NULL) ENGINE=InnoDB;
+
 --Es necesario cambiar la password del usuario. Este esta predefinido para pruebas.
 CREATE USER 'arduino' IDENTIFIED BY '1234';
 
