@@ -1,11 +1,17 @@
 <?php
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
-$host = 'localhost';
-$db = 'w_station';
-$username = 'arduino';
-$password = '1234';
+require('vendor/autoload.php');
+
+$dotenv = Dotenv\Dotenv::createImmutable('../');
+$dotenv->load();
+
+$host = $_ENV['DB_HOST'];
+$db = $_ENV['DB_NAME'];
+$username = $_ENV['DB_USER'];;
+$password = $_ENV['DB_PASSWORD'];;
 $charset ='utf8';
+
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $opt = [
     //PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,

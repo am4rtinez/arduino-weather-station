@@ -42,7 +42,7 @@ Los componentes a utilizar para iniciar el proyecto:
 
 Diseñado con fritzig.
 
-![Imagen de idea_inicial](img/arduino-weather-station_bb.png)
+![Imagen de idea_inicial](docs/img/arduino-weather-station_bb.png)
 
 ## Diseño BBDD.
 
