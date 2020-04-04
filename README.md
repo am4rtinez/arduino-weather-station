@@ -1,18 +1,20 @@
 # Arduino-Weather-Station
-Proyecto arduino para controlar varios sensores para una estación meteorológica.
+Proyecto arduino con el que se pretende controlar varios sensores (formando una estación meteorológica) y almacenarlos en una BD.
 ---
 
-El proyecto tiene el objetivo de implementar una estación meteorológica. En una primera fase medirá temperatura, humedad, presión atmosférica y luminosidad. 
+El proyecto tiene el objetivo de implementar una estación meteorológica. 
+
+En una primera fase medirá temperatura, humedad, presión atmosférica y luminosidad. 
 
 > Hay que estudiar si es factible realizar una medición de la dirección y velocidad del viento (segunda fase). 
 
 Una vez implementada hay que recoger los datos desde una fuente externa como una RPi o el microserver ya implementado para otros menesteres (corriendo una debian sin entorno gráfico). 
 
-Para ello es necesario seleccionar el método de conexion Ardunio - RPi/Microserver (lo nombraremos DataCenter para abreviar). Por distancia parece conveniente utilzar el metodo de conexión Wi-Fi.
+Para ello es necesario seleccionar el método de conexión Ardunio - RPi/Microserver (lo nombraremos DataCenter para abreviar). Por distancia parece conveniente utilzar el metodo de conexión Wi-Fi.
 
-Una vez resuelto el problema de comunicación hay que estudiar si las peticiones de datos las lanza DataCenter o Arduino es la encargada de lanzar los datos.
+Una vez resuelto el problema de comunicación hay que estudiar si las peticiones de datos las lanza DataCenter o si Arduino es la encargada de lanzar los datos.
 
-Los datos obtenidos seran almacenados en una BD. MySQL o MariaDB (aun pendiente analizar si usar PSQL).
+Los datos obtenidos seran almacenados en una BD basada en MariaDB siguiendo la filosofia Open source.
 
 Hay que intentar que una vez obtenidos los datos se realice un análisis de los mismos e incluso se puedan realizar pequeñas predicciones.
 
@@ -48,16 +50,50 @@ Diseñado con fritzig.
 
 El motor de BBDD utilizado es MariaDB. En este momento el server core es la versión 10.3.
 
-La BD contiene 3 tablas:
+La BD contiene 4 tablas:
 
 * Temperature.
 * Preasure.
 * Humidity.
+* Brightness.
 
 Cada tabla comparte la misma estructura (3 campos de datos)  solo cambia el nombre del campo de datos.
 
 Campos:
 
 * ID - Tipo INT (auto incremental).
-* DATA - Tipo FLOAT (temperature, preasure, humidity).
+* DATA - Tipo FLOAT (temperature, preasure, humidity, brightness).
 * DATE - Tipo TIMESTAMP (current_timestamp).
+
+## Configuración del servidor.
+
+Para implementar el servidor instalaremos apache2, php7.3 (actualmente la versión estable), mariadb
+```bash
+sudo apt update
+sudo apt install apache2
+sudo apt install php7.3
+sudo apt install mariadb
+```
+
+Instalamos el módulo de php para usar PDO y conectar con la BD.
+```bash
+sudo apt install php7.3-mysql
+```
+## Presentación de los datos.
+
+La interfaz gráfica (UI) esta basada en una web usando HTML5, CSS3 y JavaScript junto con las librerias de Bootstrap v4, JQuery, Chart.js y Fonts Awesome.
+
+La comunicación cliente-servidor la realizaremos a traves de una dicha web. JavaScript utilizaJSON para la obtención de los datos. 
+
+Los datos en formato JSON son solicitados a traves de una url a la cual se le pueden pasar un parametro para obtener datos de diferentes consultas.
+
+Consultas:
+
+* Últimos 20 datos almacenados en la BD de temperatura.
+* Últimos 20 datos almacenados en la BD de humedad.
+* Últimos 20 datos almacenados en la BD de presión atmosférica.
+* Últimos 20 datos almacenados en la BD de luminosidad.
+
+Ese JSON es formado por php en la parte del servidor obteniendo los datos de la BD en donde se encuentran almacenados los datos de los sensores obtenidos con arduino.  
+
+El fichero JSON es tratado en el código javascript para visualizar las gráficas con la libreria Chart.js.
