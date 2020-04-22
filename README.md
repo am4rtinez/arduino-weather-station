@@ -97,3 +97,25 @@ Consultas:
 Ese JSON es formado por php en la parte del servidor obteniendo los datos de la BD en donde se encuentran almacenados los datos de los sensores obtenidos con arduino.  
 
 El fichero JSON es tratado en el código javascript para visualizar las gráficas con la libreria Chart.js.
+
+## Hoja de Ruta.
+
+Se plantea el uso de la API de OpenWeatherMap para conseguir datos de otras estaciones y comparar con los datos de arduino y/o ampliar la información.
+También se plantea el uso de la API OpenData de AEMET pero la observación de las estaciones de Palma no parecen actualizarse continuamente tal y como indican en la documentación para desarrolladores.
+
+Como aun no hay sensores suficientes para hacer el desarrollo con arduino la web se va a ir alimentando de las APIs mencionadas anteriormente.
+
+Open Weather Maps ID Cities:
+/*
+	 * 1- 2512989 - Palma - MALLORCA
+	 * 2- 2514097 - Marratxi - MALLORCA
+	 * 3- 2520493 - Calvia - MALLORCA
+	 * 4- 2514216 - Manacor - MALLORCA
+	 * 8- 2521741 - Andratx - MALLORCA
+	 * 9- 2516452 - Inca - MALLORCA
+	 * 10- 2510821 - Soller - MALLORCA
+	 * 11- 2512432 - Pollença - MALLORCA
+	 * 12- 2521534 - Arta - MALLORCA
+	 * 13- 2511106 - Santanyi - MALLORCA
+	 * 14- 2514984 - Llucmajor - MALLORCA
+	 */

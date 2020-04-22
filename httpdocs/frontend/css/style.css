@@ -1,0 +1,438 @@
+@import url('https://fonts.googleapis.com/css?family=Baloo|Cabin|Questrial|Open+Sans|Roboto|Montserrat|Ubuntu|Poppins');
+body{
+  background: #edf0ee;
+  font-family: Ubuntu, sans-serif; 
+}
+
+a, a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
+}
+
+body .wrapper {
+  min-height: 100vh;
+  position: relative;
+}
+
+.wrapper {
+  position: relative;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 260px;
+  position: absolute;
+  font-weight: 200;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  background: #292B30;
+  background-size: cover;
+  background-position: center center;
+}
+
+.sidebar .sidebar-wrapper {
+  position: relative;
+  max-height: none;
+  min-height: 100%;
+  overflow: hidden;
+  width: 260px;
+  z-index: 4;
+  box-shadow: inset -1px 0px 0px 0px #959595;
+}
+
+.sidebar .logo{
+  padding: 18px 0px;
+  margin: 0 20px;
+  color: #fff;
+  font-size: 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, .3);
+}
+
+.sidebar .logo a:link, .sidebar .logo a:visited, .sidebar .logo a:hover, .sidebar .logo a:active {
+  text-decoration: none;
+  color: #fff;
+}
+
+.sidebar nav {
+  margin-top: 20px;
+}
+
+.sidebar nav ul{
+  margin: auto;
+  padding-left: 0;
+  list-style: none;
+}
+
+.sidebar nav li {
+  position: relative;
+  display: block;
+  padding: 10px 0;
+}
+
+.sidebar nav li a{
+  margin: 10px 0px;
+  padding-left: 45px;
+  padding-right: 25px;
+  opacity: 0.7;
+}
+
+.sidebar nav li.active a{
+  color: #6B7070;
+  opacity: 1;
+}
+
+li.active a:after{
+  width: 0;
+  height: 0;
+  border-right: 17px solid #edf0ee;
+  border-top: 17px solid transparent;
+  border-bottom: 17px solid transparent;
+  content: '';
+  position: absolute;
+  right: -2px;
+  top: 18px;
+}
+
+li.active a:before{
+  width: 0;
+  height: 0;
+  border-right: 17px solid #6B7070;
+  border-top: 17px solid transparent;
+  border-bottom: 17px solid transparent;
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 18px;
+}
+
+.sidebar nav a {
+  display: block;
+}
+
+.sidebar nav i {
+  font-size: 24px;
+  float: left;
+  margin-right: 15px;
+  line-height: 30px;
+  width: 30px;
+  text-align: center;
+}
+
+.sidebar nav p {
+  margin: 0;
+  line-height: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.sidebar nav a:link, .sidebar nav a:visited, .sidebar nav a:hover, .sidebar nav a:active {
+  text-decoration: none;
+  color: #fff;
+}
+
+.sidebar .status{
+  color: #fff;
+  position: absolute;
+  bottom: 80px;
+  margin: 10px 0px;
+  padding-left: 30px;
+  padding-right: 25px;
+}
+
+.temp-data {
+  font-weight: 500;
+  font-size: 75px;
+}
+
+.units {
+  font-size: 35px;
+}
+
+.icons {
+  color: #C2A263;
+}
+
+.main-panel {
+  background-color: #edf0ee;
+  position: relative;
+  z-index: 2;
+  float: right;
+  width: calc(100% - 260px);
+  min-height: 100%;
+}
+
+.sidebar, .main-panel {
+  overflow: auto;
+  max-height: 100%;
+  height: 100%;
+  -webkit-transition-property: top, bottom;
+  transition-property: top, bottom;
+  -webkit-transition-duration: 0.2s, 0.2s;
+  transition-duration: 0.2s, 0.2s;
+  -webkit-transition-timing-function: linear, linear;
+  transition-timing-function: linear, linear;
+  -webkit-overflow-scrolling: touch;
+}
+
+.main-panel .navbar {
+  margin-bottom: 0;
+}
+
+.navbar {
+  padding: 2px 1rem;
+}
+
+.navbar-default {
+  background-color: #edf0ee;
+  border-bottom: 1px solid #7A7275;
+  font-size: 16px;
+}
+
+.navbar-default .navbar-brand {
+  color: #777;
+}
+
+.navbar .navbar-header{
+  margin-left: 10px;
+}
+
+.navbar .navbar-brand {
+  font-weight: 600;
+  margin: auto;
+  padding: 20px 0;
+  font-size: 20px;
+}
+
+.datetime {
+  display: inline-block;
+  line-height: inherit;
+  white-space: nowrap;
+  font-size: 20px;
+}
+
+.datetime #descDay {
+  margin-left: 10px;
+}
+
+.main-panel .content {
+  padding: 30px 15px;
+}
+
+.card{
+  border-radius: 6px;
+  box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);
+  background-color: #fff;
+  color: #252422;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.card-header {
+  background-color: transparent;
+}
+
+.card .content{
+  padding: 0 15px 10px 15px;
+}
+
+.card .footer hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+hr {
+  border-color: #dcdcdc;
+}
+
+.card .footer {
+  color: #7A7275;
+  font-weight: lighter;
+  font-size: 14px;
+  font-family: Montserrat, sans-serif;
+  margin-bottom: -8px;
+  margin-top: -8px;
+}
+
+.card .dataField, .card .arduLastHumData, .card .arduLastPreasData, .card .arduLastBrigData {
+  font-size: 65px;
+}
+
+/* Esquema de colores actual:
+  Background        > #EDF0EE
+                    > #6B7070
+                    > #717C88
+                    > #7A7275
+  Background Sidebar > #292B30
+*/
+
+/* Esquema de colores https://javier.xyz/cohesive-colors/?src=E8DDCB,CDB380,036564,033649,031634&overlay=25231f&intensity=0.3
+  Color para fondo: #024F4D;
+  Color cabeceras: #022A38;
+  Color header pagina: #021128;
+  Color fondos gráficos: #E3D6BF;
+  Color contraste: #C2A263;
+*/
+
+/*====== Clock =======*/
+#dig_clock
+{
+  padding: 18px 0px;
+  margin: 0 20px;
+  color: #fff;
+  font-size: 20px;
+  border-top: 1px solid rgba(255, 255, 255, .3);
+  display: flex;
+  font-family: 'Questrial', sans-serif;
+  color: #DDDCDB;
+  justify-content: center;
+  position: absolute;
+  width: 85%;
+  bottom: 0;
+}
+#dig_clock div
+{
+  position: relative;
+  margin: 0px 2px;
+  
+}
+#dig_clock #dig_hours, #dig_clock #dig_minutes, #dig_clock #dig_seconds, #dig_clock .dig_separator
+{
+  justify-content: center;
+}
+
+#tempChart {
+  width: 80%;
+}
+
+/* */
+
+#map {
+  height: 700px;
+  margin: 0px;
+}
+
+.weather-data{
+  margin-left: -6px;
+  box-shadow: 1px 1px 5px 0 rgba(0,0,0,.3);
+  display: block;
+}
+
+.weather-city{
+  box-shadow: 1px 1px 5px 0 rgba(0,0,0,.3);
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+
+.weather-city h2 {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.temp, .city {
+  z-index: -1;
+  margin: auto;
+  padding: 2px 5px 2px 5px;
+  font-weight: bold;
+  font-family: 'Open Sans';
+  font-size: 12px;
+	display: inline-block;
+  text-align: center !important;
+}
+
+.city {
+  background-color: #000;
+  color: white;
+}
+
+.control-legend {
+  width: 360px;
+  background: #FFF;
+  border:2px solid #FFF;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px 1px rgba(0,0,0,.5);
+  display: block;
+  padding: 5px;
+}
+
+.scale-value {
+  line-height: 100%;
+  vertical-align: top;
+}
+
+.color-scale-line{
+  background-image: linear-gradient(to right,
+    #7F3D93 0%,
+    #9C3FB8 5%,
+    #9f55b5 10%,
+    #2C6ABB 15%,
+    #528bd5 20%,
+    #67a3de 25%,
+    #8ecaf0 30%,
+    #9bd5f4 35%,
+    #ace1fd 40%,
+    #c2eaff 45%,
+    #ffffff 50%,
+    #ffffd0 55%,
+    #fee892 60%,
+    #fee270 65%,
+    #fdd461 70%,
+    #f4a85e 75%,
+    #f48159 80%,
+    #F57061 85%,
+    #f46859 90%,
+    #f44c49 95%,
+    #F5231F 100%);
+  width: 100%;
+  position: inherit;
+  height: 15px;
+  border: 1px solid #777;
+}
+
+.min-value{
+  left: 0;
+  position: absolute;
+  color: white;
+  font-weight: bold;
+}
+
+.avg-value {
+  right: 48%;
+  position: absolute;
+  color: black;
+  font-weight: bold;
+}
+
+.max-value{
+  right: 0;
+  position: absolute;
+  color: black;
+  font-weight: bold;
+}
+
+/* =========Esquema colores temp==========*/
+.c-min-50{background-color: #7F3D93; color: white;}
+.c-min-45{background-color: #9C3FB8; color: white;}
+.c-min-40{background-color: #9f55b5; color: white;}
+.c-min-35{background-color: #2C6ABB; color: white;}
+.c-min-30{background-color: #528bd5; color: white;}
+.c-min-25{background-color: #67a3de; color: black;}
+.c-min-20{background-color: #8ecaf0; color: black;}
+.c-min-15{background-color: #9bd5f4; color: black;}
+.c-min-10{background-color: #ace1fd; color: black;}
+.c-min-5{background-color: #c2eaff; color: black;}
+.c-0{background-color: #ffffff; color: black;}
+.c-plus-5{background-color: #ffffd0; color: black;}
+.c-plus-10{background-color: #fee892; color: black;}
+.c-plus-15{background-color: #fee270; color: black;}
+.c-plus-20{background-color: #fdd461; color: black;}
+.c-plus-25{background-color: #f4a85e; color: black;}
+.c-plus-30{background-color: #f48159; color: black;}
+.c-plus-35{background-color: #F57061; color: white;}
+.c-plus-40{background-color: #f46859; color: white;}
+.c-plus-45{background-color: #f44c49; color: white;}
+.c-plus-50{background-color: #F5231F; color: white;}
