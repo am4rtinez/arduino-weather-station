@@ -1,0 +1,25 @@
+{
+  "name": "arduweather",
+  "version": "1.0.0",
+  "description": "Proyecto web para mostrar datos de una estacion meteo con arduino",
+  "main": "backend/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon backend/server.js"
+  },
+  "keywords": [
+    "arduino",
+    "weather"
+  ],
+  "author": "Angel Martinez",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "https": "^1.0.0",
+    "mariadb": "^2.3.1",
+    "node-fetch": "^2.6.0"
+  }
+}
