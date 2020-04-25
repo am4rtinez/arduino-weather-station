@@ -247,7 +247,7 @@ hr {
   border-color: #dcdcdc;
 }
 
-.card .footer {
+.card .footer{
   color: #7A7275;
   font-weight: lighter;
   font-size: 14px;
@@ -256,8 +256,21 @@ hr {
   margin-top: -8px;
 }
 
-.card .dataField, .card .arduLastHumData, .card .arduLastPreasData, .card .arduLastBrigData {
-  font-size: 65px;
+.card .card-body .content .footer i{
+  font-size: 14px;
+}
+
+.card .dataField{
+  font-size: 60px;
+}
+
+.card .dataIcon.fa-tint, .card .dataIcon.fa-heat, .card .dataIcon.fa-lightbulb{
+  color: #607288;
+}
+
+.card .dataIcon{
+  font-size: 70px;
+  margin-right: 5px;
 }
 
 /* Esquema de colores actual:
@@ -436,3 +449,25 @@ hr {
 .c-plus-40{background-color: #f46859; color: white;}
 .c-plus-45{background-color: #f44c49; color: white;}
 .c-plus-50{background-color: #F5231F; color: white;}
+
+.t-min-50{color: #7F3D93;}
+.t-min-45{color: #9C3FB8;}
+.t-min-40{color: #9f55b5;}
+.t-min-35{color: #2C6ABB;}
+.t-min-30{color: #528bd5;}
+.t-min-25{color: #67a3de;}
+.t-min-20{color: #8ecaf0;}
+.t-min-15{color: #9bd5f4;}
+.t-min-10{color: #ace1fd;}
+.t-min-05{color: #c2eaff;}
+.t-00{color: #ffffff;}
+.t-plus-05{color: #ffffd0;}
+.t-plus-10{color: #fee892;}
+.t-plus-15{color: #fee270;}
+.t-plus-20{color: #fdd461;}
+.t-plus-25{color: #f4a85e;}
+.t-plus-30{color: #f48159;}
+.t-plus-35{color: #F57061;}
+.t-plus-40{color: #f46859;}
+.t-plus-45{color: #f44c49;}
+.t-plus-50{color: #F5231F;}

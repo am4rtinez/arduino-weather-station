@@ -1,16 +1,16 @@
 $(document).ready(function(){
 
-	const url_temp_query = 'https://localhost:3000/query/temp20';
-	const url_hum_query = 'https://localhost:3000/query/hum20';
-	const url_preasure_query = 'http://192.168.1.4:3000/query/preas20';
-	const url_brightness_query = 'http://192.168.1.4:3000/query/brig20';
+	const url_temp_query = 'https://lilith:3000/query/temp20';
+	const url_hum_query = 'https://lilith:3000/query/hum20';
+	const url_preasure_query = 'http://lilith:3000/query/preas20';
+	const url_brightness_query = 'http://lilith:3000/query/brig20';
 
-	getCurrentStatus(document.getElementsByClassName('dataCondActual'),'https://192.168.1.4:3000/current_weather_OW/2512989');
-	getForecastData(document.getElementsByClassName('dataForecast'),'https://192.168.1.4:3000/forecast_OW/2512989');
-	getLatestData(document.getElementsByClassName('arduLastTempData'), 'https://localhost:3000/query/lastTemp', 'temperature', 'ºC');
-	getLatestData(document.getElementsByClassName('arduLastHumData'), 'https://localhost:3000/query/lastHum', 'humidity', '%');
-	getLatestData(document.getElementsByClassName('arduLastPreasData'), 'https://localhost:3000/query/lastPreas', 'preasure', 'hPa');
-	getLatestData(document.getElementsByClassName('arduLastBrigData'), 'https://localhost:3000/query/lastBrig', 'brightness', 'Lux');
+	getCurrentStatus(document.getElementsByClassName('dataCondActual'),'https://lilith:3000/current_weather_OW/2512989');
+	getForecastData(document.getElementsByClassName('dataForecast'),'https://lilith:3000/forecast_OW/2512989');
+	getLatestData(document.getElementsByClassName('arduLastTempData'), 'https://lilith:3000/query/lastTemp', 'temperature', 'ºC');
+	getLatestData(document.getElementsByClassName('arduLastHumData'), 'https://lilith:3000/query/lastHum', 'humidity', '%');
+	getLatestData(document.getElementsByClassName('arduLastPreasData'), 'https://lilith:3000/query/lastPreas', 'preasure', 'hPa');
+	getLatestData(document.getElementsByClassName('arduLastBrigData'), 'https://lilith:3000/query/lastBrig', 'brightness', 'Lux');
 
 	var options = {
 		legend: {
@@ -54,7 +54,7 @@ $(document).ready(function(){
 	    datasetFill : true,       
 	};
 	
-	getData();
+	//getData();
 
 	async function getCurrentStatus(item,url){
 		const response = await fetch(url);
@@ -109,11 +109,28 @@ $(document).ready(function(){
 	async function getLatestData(item, url, field, units){
 		const response = await fetch(url);
 		const json = await response.json();
-		var date=new Date(json[0].date);
-		var hours = (date.getHours() < 10) ? "0" + date.getHours() : date.getHours();
-		var minutes = (date.getMinutes() < 10) ? "0" + date.getMinutes() : date.getMinutes();
-		var formattedTime = hours + ':' + minutes;	
-		$(item).html(`<div class="content text-center"><span class="dataField">${json[0][field]}</span><span class="units">${units}</span></div><hr><div class="footer"><i class="fad fa-sync"></i> Ultima actualizacion: <span class="updated_time">${formattedTime}</span></div>`);		
+		let date=new Date(json[0].date);
+		let hours = (date.getHours() < 10) ? "0" + date.getHours() : date.getHours();
+		let minutes = (date.getMinutes() < 10) ? "0" + date.getMinutes() : date.getMinutes();
+		let formattedTime = hours + ':' + minutes;
+		let htmlCode = `<div class="content text-center">`;
+		switch (field) {
+			case 'temperature':
+				htmlCode = `${htmlCode}${setTempIcon(json[0][field])}`;
+			break;
+			case 'humidity':
+				htmlCode = `${htmlCode}<i class="fa fa-tint dataIcon"> </i>`;
+			break;
+			case 'preasure':
+				htmlCode = `${htmlCode}<i class="fa fa-heat dataIcon"> </i>`;
+			break;
+			case 'brightness':
+				htmlCode = `${htmlCode}<i class="fa fa-lightbulb dataIcon"> </i>`;
+			break;
+
+		}
+		$(item).html(`${htmlCode}<span class="dataField">${json[0][field]}</span><span class="units">${units}</span></div>
+		<hr><div class="footer"><i class="fad fa-sync"></i> Ultima actualizacion: <span class="updated_time">${formattedTime}</span></div>`);
 	}
 
 	async function getData() {
@@ -192,5 +209,54 @@ $(document).ready(function(){
 	function checkTime(i){
 		if(i<10) {i = "0" + i};
 		return i;
+	}
+
+	function setTempIcon (temperatura) {
+		let html = `<i class="fa fa-thermometer-three-quarters dataIcon `;
+		if (temperatura <= -50){
+			html = `${html}t-min-50`;
+		} else if (temperatura > -50 && temperatura <= -45) {
+			html = `${html}t-min-45`;
+		} else if (temperatura > -45 && temperatura <= -40) {
+			html = `${html}t-min-40`;
+		} else if (temperatura > -40 && temperatura <= -35) {
+			html = `${html}t-min-35`;
+		} else if (temperatura > -35 && temperatura <= -30) {
+			html = `${html}t-min-30`;
+		} else if (temperatura > -30 && temperatura <= -25) {
+			html = `${html}t-min-25`;
+		} else if (temperatura > -25 && temperatura <= -20) {
+			html = `${html}t-min-20`;
+		} else if (temperatura > -20 && temperatura <= -15) {
+			html = `${html}t-min-15`;
+		} else if (temperatura > -15 && temperatura <= -10) {
+			html = `${html}t-min-10`;
+		} else if (temperatura > -10 && temperatura <= -5) {
+			html = `${html}t-min-05`;
+		} else if (temperatura > -5 && temperatura < 5) {
+			html = `${html}t-00`;
+		} else if (temperatura >= 5 && temperatura < 10) {
+			html = `${html}t-plus-05`;
+		} else if (temperatura >= 10 && temperatura < 15) {
+			html = `${html}t-plus-10`;
+		} else if (temperatura >= 15 && temperatura < 20) {
+			html = `${html}t-plus-15`;
+		} else if (temperatura >= 20 && temperatura < 25) {
+			html = `${html}t-plus-20`;
+		} else if (temperatura >= 25 && temperatura < 30) {
+			html = `${html}t-plus-25`;
+		} else if (temperatura >= 30 && temperatura < 35) {
+			html = `${html}t-plus-30`;
+		} else if (temperatura >= 35 && temperatura < 40) {
+			html = `${html}t-plus-35`;
+		} else if (temperatura >= 40 && temperatura < 45) {
+			html = `${html}t-plus-40`;
+		} else if (temperatura >= 45 && temperatura < 50) {
+			html = `${html}t-plus-45`;
+		} else if (temperatura >= 50) {
+			html = `${html}t-plus-50`;
+		}
+			html = `${html}"> </i>`;
+			return (html);
 	}
 });
