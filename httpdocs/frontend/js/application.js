@@ -1,16 +1,16 @@
 $(document).ready(function(){
 
-	const url_temp_query = 'https://lilith:3000/query/temp20';
-	const url_hum_query = 'https://lilith:3000/query/hum20';
-	const url_preasure_query = 'http://lilith:3000/query/preas20';
-	const url_brightness_query = 'http://lilith:3000/query/brig20';
+	const url_temp_query = 'query/temp20';
+	const url_hum_query = 'query/hum20';
+	const url_preasure_query = 'query/preas20';
+	const url_brightness_query = 'query/brig20';
 
-	getCurrentStatus(document.getElementsByClassName('dataCondActual'),'https://lilith:3000/current_weather_OW/2512989');
-	getForecastData(document.getElementsByClassName('dataForecast'),'https://lilith:3000/forecast_OW/2512989');
-	getLatestData(document.getElementsByClassName('arduLastTempData'), 'https://lilith:3000/query/lastTemp', 'temperature', 'ºC');
-	getLatestData(document.getElementsByClassName('arduLastHumData'), 'https://lilith:3000/query/lastHum', 'humidity', '%');
-	getLatestData(document.getElementsByClassName('arduLastPreasData'), 'https://lilith:3000/query/lastPreas', 'preasure', 'hPa');
-	getLatestData(document.getElementsByClassName('arduLastBrigData'), 'https://lilith:3000/query/lastBrig', 'brightness', 'Lux');
+	getCurrentStatus(document.getElementsByClassName('dataCondActual'),'current_weather_OW/2512989');
+	getForecastData(document.getElementsByClassName('dataForecast'),'forecast_OW/2512989');
+	getLatestData(document.getElementsByClassName('arduLastTempData'), 'query/lastTemp', 'temperature', 'ºC');
+	getLatestData(document.getElementsByClassName('arduLastHumData'), 'query/lastHum', 'humidity', '%');
+	getLatestData(document.getElementsByClassName('arduLastPreasData'), 'query/lastPreas', 'preasure', 'hPa');
+	getLatestData(document.getElementsByClassName('arduLastBrigData'), 'query/lastBrig', 'brightness', 'Lux');
 
 	var options = {
 		legend: {
