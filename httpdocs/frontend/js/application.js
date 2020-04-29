@@ -1,16 +1,18 @@
 $(document).ready(function(){
-
 	const url_temp_query = 'query/temp20';
 	const url_hum_query = 'query/hum20';
-	const url_preasure_query = 'query/preas20';
+	const url_pressure_query = 'query/press20';
 	const url_brightness_query = 'query/brig20';
 
-	getCurrentStatus(document.getElementsByClassName('dataCondActual'),'current_weather_OW/2512989');
+	let pathname = window.location.pathname;
+	$('.nav-item > a[href="'+pathname+'"]').parent().addClass('active');
+
+	showCurrentStatus('current_weather_OW/2512989');
 	getForecastData(document.getElementsByClassName('dataForecast'),'forecast_OW/2512989');
-	getLatestData(document.getElementsByClassName('arduLastTempData'), 'query/lastTemp', 'temperature', 'ºC');
-	getLatestData(document.getElementsByClassName('arduLastHumData'), 'query/lastHum', 'humidity', '%');
-	getLatestData(document.getElementsByClassName('arduLastPreasData'), 'query/lastPreas', 'preasure', 'hPa');
-	getLatestData(document.getElementsByClassName('arduLastBrigData'), 'query/lastBrig', 'brightness', 'Lux');
+	//getLatestData(document.getElementsByClassName('lastTempData'), 'query/lastTemp', 'temperature', 'ºC');
+	//getLatestData(document.getElementsByClassName('lastHumData'), 'query/lastHum', 'humidity', '%');
+	//getLatestData(document.getElementsByClassName('lastPressData'), 'query/lastPress', 'pressure', 'hPa');
+	//getLatestData(document.getElementsByClassName('lastBrigData'), 'query/lastBrig', 'brightness', 'Lux');
 
 	var options = {
 		legend: {
@@ -53,40 +55,34 @@ $(document).ready(function(){
 	    datasetStrokeWidth : 3,
 	    datasetFill : true,       
 	};
-	
-	//getData();
 
-	async function getCurrentStatus(item,url){
+	getData();
+
+	async function showCurrentStatus(url){
+		const item = document.getElementsByClassName('dataCondActual');
 		const response = await fetch(url);
 		const json = await response.json();
-
+		let urlIcon =`http://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png`;
+		let time = convertTime(json.dt);
+		
 		$(item).html(`<div class="content">
-				<div class="row">
-					<div class="col">
-						<img src="http://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png" alt="Imagen tiempo actual">
-						<span class="">${json.weather[0].description.charAt(0).toUpperCase() + json.weather[0].description.slice(1)}</span>
-						</div>
-						<div class="col">
-							<span class="">Temp: ${json.main.temp}ºC</span><br>
-							<span class="">Hum: ${json.main.humidity}%</span><br>
-							<span class="">Sensación: ${json.main.feels_like}ºC</span><br>
-							<span class="">Pres: ${json.main.pressure} hPa</span><br>
-							<span class="">Viento: ${json.wind.speed} m/s</span><br>
-						</div>
-					</div>
+			<div class="col text-center">
+				<img src="${urlIcon}" alt="${json.weather[0].description.charAt(0).toUpperCase() + json.weather[0].description.slice(1)}" width="110px"><br>
 			</div>
 			<hr>
-			<div class="footer">
-			<i class="fad fa-sync"></i> Ultima actualizacion: <span class="updated_time">${convertTime(json.dt)}</span>
-			</div>`);
-	}
+			<div class="footer text-center">
+			<i class="fad fa-sync"></i> <span class="updated_time">${convertTime(json.dt)}</span>
+			</div>`
+		);
 
-	/*
-	<div class="content">ABC</div>
-	<hr>
-	<div class="footer">
-		<i class="fad fa-sync"></i> Ultima actualizacion: <span class="updated-time">00:00</span>
-	</div>*/
+		//Imprime ultimos datos en los cards correspondientes. lastTempData lastHumData lastPressData lastBrigData lastWindData
+		showLatestData(document.getElementsByClassName('lastTempData'), 'temperature', 'ºC', time, json.main.temp);
+		showLatestData(document.getElementsByClassName('lastHumData'), 'humidity', '%', convertTime(json.dt), json.main.humidity);
+		showLatestData(document.getElementsByClassName('lastPressData'), 'pressure', 'hPa', convertTime(json.dt), json.main.pressure);
+		showLatestData(document.getElementsByClassName('lastWindData'),'wind', 'm/s', convertTime(json.dt), json.wind.speed);
+		showLatestData(document.getElementsByClassName('lastBrigData'),'brightness', '', convertTime(json.dt), json.visibility);
+
+	}
 
 	async function getForecastData(item,url){
 		const response = await fetch(url);
@@ -95,48 +91,75 @@ $(document).ready(function(){
 		let string = '<div class="content text-center"><div class="row">';
 
 		for (jitem of json.list){
+			let urlIcon =`http://openweathermap.org/img/wn/${jitem.weather[0].icon}@2x.png`;
+			console.log(urlIcon);
 			string = `${string}
 				<div class="col">
-					<span class="text-center">${convertTime(jitem.dt)}</span><br>
-					<img src="http://openweathermap.org/img/wn/${jitem.weather[0].icon}@2x.png" alt="Imagen tiempo actual" width="90px"><br>
-					<span class="">${jitem.weather[0].description.charAt(0).toUpperCase() + jitem.weather[0].description.slice(1)}</span><br>
-					<span class="">Temp: ${jitem.main.temp}ºC</span>
+					<b><span class="text-center">${convertTime(jitem.dt)}</span></b><br>
+					<img src="${urlIcon}" alt="${jitem.weather[0].description.charAt(0).toUpperCase() + jitem.weather[0].description.slice(1)}" width="100px"><br>
+					<span class="">${jitem.main.temp}ºC</span>
 				</div>`;
 		}
 		$(item).html(`${string}</div></div>`);
 	}
 
-	async function getLatestData(item, url, field, units){
+	function showLatestData(item, field, units, dt, data){
+		let htmlCode = `<div class="content text-center"><div class="dataItem">`;
+		switch (field) {
+			case 'temperature':
+				htmlCode = `${htmlCode}${setTempIcon(data)}`;
+				//$(document.getElementsByClassName('temp-data')).html(`${data}`);
+			break;
+			case 'humidity':
+				htmlCode = `${htmlCode}<i class="fa fa-tint dataIcon"></i>`;
+			break;
+			case 'pressure':
+				htmlCode = `${htmlCode}<i class="fa fa-heat dataIcon"></i>`;
+			break;
+			case 'brightness':
+				//htmlCode = `${htmlCode}<i class="fa fa-lightbulb dataIcon"></i>`;
+				htmlCode = `${htmlCode}<i class="fa fa-eye dataIcon"></i>`;
+			break;
+			case 'wind':
+				htmlCode = `${htmlCode}<i class="fa fa-wind dataIcon"></i>`;
+			break;
+
+		}
+		$(item).html(`${htmlCode}<span class="dataField">${data}</span><span class="units">${units}</span></div></div>
+		<hr><div class="footer text-center"><i class="fad fa-sync"></i> <span class="updated_time">${dt}</span></div>`);
+	}
+
+	/*async function showLatestData(item, url, field, units){
 		const response = await fetch(url);
 		const json = await response.json();
 		let date=new Date(json[0].date);
 		let hours = (date.getHours() < 10) ? "0" + date.getHours() : date.getHours();
 		let minutes = (date.getMinutes() < 10) ? "0" + date.getMinutes() : date.getMinutes();
 		let formattedTime = hours + ':' + minutes;
-		let htmlCode = `<div class="content text-center">`;
+		let htmlCode = `<div class="content text-center"><div class="dataItem">`;
 		switch (field) {
 			case 'temperature':
 				htmlCode = `${htmlCode}${setTempIcon(json[0][field])}`;
 			break;
 			case 'humidity':
-				htmlCode = `${htmlCode}<i class="fa fa-tint dataIcon"> </i>`;
+				htmlCode = `${htmlCode}<i class="fa fa-tint dataIcon"></i>`;
 			break;
-			case 'preasure':
-				htmlCode = `${htmlCode}<i class="fa fa-heat dataIcon"> </i>`;
+			case 'pressure':
+				htmlCode = `${htmlCode}<i class="fa fa-heat dataIcon"></i>`;
 			break;
 			case 'brightness':
-				htmlCode = `${htmlCode}<i class="fa fa-lightbulb dataIcon"> </i>`;
+				htmlCode = `${htmlCode}<i class="fa fa-lightbulb dataIcon"></i>`;
 			break;
 
 		}
-		$(item).html(`${htmlCode}<span class="dataField">${json[0][field]}</span><span class="units">${units}</span></div>
+		$(item).html(`${htmlCode}<span class="dataField">${json[0][field]}</span><span class="units">${units}</span></div></div>
 		<hr><div class="footer"><i class="fad fa-sync"></i> Ultima actualizacion: <span class="updated_time">${formattedTime}</span></div>`);
-	}
+	} */
 
 	async function getData() {
 		getDataJSON(url_temp_query, "temperature", "tempChart", "#FE2E2E");
 		getDataJSON(url_hum_query, "humidity", "humChart", "#5858FA");
-		//getDataJSON(url_preasure_query, "preasure", "preasureChart", "#2EC445");
+		//getDataJSON(url_pressure_query, "pressure", "pressureChart", "#2EC445");
 		//getDataJSON(url_brightness_query, "brightness", "brightnessChart", "#E3D94B");
 	}
 
@@ -256,7 +279,7 @@ $(document).ready(function(){
 		} else if (temperatura >= 50) {
 			html = `${html}t-plus-50`;
 		}
-			html = `${html}"> </i>`;
+			html = `${html}"></i>`;
 			return (html);
 	}
 });

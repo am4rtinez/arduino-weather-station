@@ -1,16 +1,10 @@
-var map;
-var ajaxRequest;
-var plotlist;
-var plotlayers=[];
+/*
+async function initMap() {
 
-var apiKey = 'YOUR_API_HERE';
-
-async function initmap() {
-
-	var mymap = L.map('map').setView([39.5494, 2.5502], 11);
+	let mymap = L.map('map').setView([39.5494, 2.5502], 11);
 
 	if ("geolocation" in navigator) {
-		/* la geolocalización está disponible */
+		// la geolocalización está disponible 
 		navigator.geolocation.getCurrentPosition(function(position) {
 			const navLat = position.coords.latitude;
 			const navLong = position.coords.longitude;
@@ -18,7 +12,7 @@ async function initmap() {
 			//markerLocation.addTo(mymap);
 		});
 	} else {
-		/* la geolocalización NO está disponible */
+		// la geolocalización NO está disponible 
 	}
 
 	var grayscale = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
@@ -26,14 +20,14 @@ async function initmap() {
 	}).addTo(mymap);
 
 	//TileLayer de Mapbox que muestra las calles
-	/*var mapboxStreetsTL = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+	var mapboxStreetsTL = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 	    attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 	    maxZoom: 18,
 	    id: 'mapbox/streets-v11',
 	    tileSize: 512,
 	    zoomOffset: -1,
 	    accessToken: ''
-	});*/
+	});
 
 	var mapboxOutdorsTL = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 	    attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -44,25 +38,25 @@ async function initmap() {
 	    accessToken: ''
 	}).addTo(mymap);
 
-	var temp = L.tileLayer('http://{s}.tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=94aafd624fbb4e7e0282a15dfa614356&lang=es', {
+	var temp = L.tileLayer('http://{s}.tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=${apiKeyOW}&lang=es', {
 		maxZoom: 200,
 	  attribution: '&copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
 	  id: 'temp'
 	});
 
-	var clouds = L.tileLayer('http://{s}.tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=94aafd624fbb4e7e0282a15dfa614356&lang=es', {
+	var clouds = L.tileLayer('http://{s}.tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${apiKeyOW}&lang=es', {
 		maxZoom: 200,
 	  attribution: '&copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
 	  id: 'clouds_new'
 	});
 
-	var precipitation = L.tileLayer('http://{s}.tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=94aafd624fbb4e7e0282a15dfa614356&lang=es', {
+	var precipitation = L.tileLayer('http://{s}.tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=${apiKeyOW}&lang=es', {
 		maxZoom: 200,
 	  attribution: '&copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
 	  id: 'precipitation_new'
 	});
 
-	var wind = L.tileLayer('http://{s}.tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=94aafd624fbb4e7e0282a15dfa614356&lang=es', {
+	var wind = L.tileLayer('http://{s}.tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=${apiKeyOW}&lang=es', {
 		maxZoom: 200,
 	  attribution: '&copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
 	  id: 'wind_new'
@@ -81,12 +75,10 @@ async function initmap() {
 	}
 	cities.addTo(mymap);
 
-	//mapboxStreetsTL.addTo(mymap);
-
 	//Crea los grupos de capas base y overlay.
 	var baseMaps = {
 	    "Grayscale": grayscale,
-	    //"Calles": mapboxStreetsTL,
+	    "Calles": mapboxStreetsTL,
 	    "Elevacion": mapboxOutdorsTL
 	};
 	var overlayMaps = {
@@ -101,7 +93,6 @@ async function initmap() {
 
 	ponerLeyenda();
 
-	/* ========== LISTADO DE FUNCIONES =========== */
 
 	function ponerMarkers(item){
 	//	console.log(item);
@@ -211,23 +202,68 @@ async function initmap() {
 	    return div;
 		};
 		legend.addTo(mymap);
+	}	
+}
+
+function convertDate(timestamp){
+	// Create a new JavaScript Date object based on the timestamp
+	// multiplied by 1000 so that the argument is in milliseconds, not seconds.
+	var date = new Date(timestamp * 1000);
+	// Hours part from the timestamp
+	var hours = date.getHours();
+	// Minutes part from the timestamp
+	var minutes = "0" + date.getMinutes();
+	// Seconds part from the timestamp
+	var seconds = "0" + date.getSeconds();
+	
+	if(hours<10) {hours = "0" + hours};
+
+	// Will display time in 10:30:23 format
+	var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+	return formattedTime;
+}*/
+
+async function initMap() {
+	let navLat = 39.5661;
+	let navLong = 2.6484;
+	let json_apik = await getApiKeys();
+	
+	const api_key_ow = json_apik.API_KEY_OW;
+	const api_key_mapbox = json_apik.API_KEY_MAPBOX;
+	if ("geolocation" in navigator) {
+		// la geolocalización está disponible
+		navigator.geolocation.getCurrentPosition(position => {
+			console.log(position.coords);
+		});
+	} else {
+		// la geolocalización NO está disponible
 	}
 
-	function convertDate(timestamp){
-		// Create a new JavaScript Date object based on the timestamp
-		// multiplied by 1000 so that the argument is in milliseconds, not seconds.
-		var date = new Date(timestamp * 1000);
-		// Hours part from the timestamp
-		var hours = date.getHours();
-		// Minutes part from the timestamp
-		var minutes = "0" + date.getMinutes();
-		// Seconds part from the timestamp
-		var seconds = "0" + date.getSeconds();
-    
-    if(hours<10) {hours = "0" + hours};
+	//mapboxgl.accessToken = 'pk.eyJ1IjoiYW00cnRpbmV6IiwiYSI6ImNrOTNsY3p6djAyMDAzbHJ1ZW9uMWF3bzkifQ.bWWGuFChx--vInNm-Jktcg';
+	mapboxgl.accessToken = api_key_mapbox;
+	let map = new mapboxgl.Map({
+		container: 'map',
+		style: 'mapbox://styles/mapbox/outdoors-v11',
+		zoom: 10,
+		center: [navLong, navLat]
+	});
 
-		// Will display time in 10:30:23 format
-		var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-		return formattedTime;
-	}
+	//map.addControl(new mapboxgl.NavigationControl());
+	const nav = new mapboxgl.NavigationControl();
+	map.addControl(nav, 'top-left');
+
+	var scale = new mapboxgl.ScaleControl({
+    maxWidth: 100,
+    unit: 'imperial'
+	});
+	map.addControl(scale);
+
+	scale.setUnit('metric');
+}
+
+async function getApiKeys(){
+	const url = 'getapikeys';
+	const response = await fetch(url);
+	const json = await response.json();
+	return json;
 }

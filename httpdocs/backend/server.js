@@ -6,11 +6,40 @@ const fs = require('fs')
 const https = require('https')
 const mariadb = require('./database');
 const cors = require('cors');
+const path = require('path');
 const app = express();
+const expressLayouts = require('express-ejs-layouts');
 
-//app.listen(3000, () => console.log('listening on port 3000'))
-app.use(cors())
+//app.listen(3000, () => console.log('App listening on port 3000! Go to http://localhost:3000/'))
+//app.use(cors())
 app.use(express.static('frontend'))
+
+// set the view engine to ejs
+app.set('views', path.join(__dirname, '../frontend/views'));
+app.set('view engine', 'ejs');
+app.use(expressLayouts);
+
+app.get('/', function(req, res) {
+	res.render('pages/index');
+});
+app.get('/temperature', function(req, res) {
+	res.render('pages/temperature');
+});
+app.get('/humidity', function(req, res) {
+	res.render('pages/humidity');
+});
+app.get('/pressure', function(req, res) {
+	res.render('pages/pressure');
+});
+app.get('/brightness', function(req, res) {
+	res.render('pages/brightness');
+});
+app.get('/openweather', function(req, res) {
+	res.render('pages/openweather');
+});
+app.get('/mapping', function(req, res) {
+	res.render('pages/mapping');
+});
 
 //Config headers & cors
 
@@ -27,7 +56,7 @@ https.createServer({
   cert: fs.readFileSync('server.cert')
 }, app)
 .listen(3000, function () {
-  console.log('Example app listening on port 3000! Go to https://localhost:3000/')
+  console.log('App listening on port 3000! Go to https://localhost:3000/')
 })
 
 app.get('/weather_cities', async (request, response) => {
@@ -63,19 +92,29 @@ app.get('/forecast_OW/:id', async (request, response) =>{
 	const json = await fetch_response.json();
   response.json(json);
 }); 
+
 /*
 	* Conexión a la BD para obtener datos obtenidos con Arduino.
 	lastTemp - Obtiene el último dato de temperatura.
 	lastHum - Obtiene el último dato de humedad relativa.
-	lastPreas - Obtiene el último dato de presión atmosférica.
+	lastPress - Obtiene el último dato de presión atmosférica.
 	lastBrig - Obtiene el último dato de luminosidad.
 	temp20 - Obtiene los últimos 20 datos de temperatura.
 	hum20 - Obtiene los últimos 20 datos de humedad relativa.
-	preas20 - Obtiene los últimos 20 datos de presión atmosférica.
+	press20 - Obtiene los últimos 20 datos de presión atmosférica.
 	brig20 - Obtiene los últimos 20 datos de luminosidad.
 */
 app.get('/query/:query', (request, response) => {
 	mariadb.getDataDB(request.params.query)
 			.then(data => response.status(200).json(data))
 			.catch(err => response.json(err))
-});
+})
+
+app.get('/getapikeys', (request, response) => {
+	let data = {
+		"API_KEY_OW": process.env.API_KEY_OW,
+		"API_KEY_MAPBOX": process.env.API_KEY_MAPBOX
+	}
+
+	response.json(data);
+})

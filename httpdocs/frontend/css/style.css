@@ -138,7 +138,7 @@ li.active a:before{
   position: absolute;
   bottom: 80px;
   margin: 10px 0px;
-  padding-left: 30px;
+  padding-left: 18px;
   padding-right: 25px;
 }
 
@@ -149,6 +149,7 @@ li.active a:before{
 
 .units {
   font-size: 35px;
+  margin-top: 30px;
 }
 
 .icons {
@@ -211,6 +212,7 @@ li.active a:before{
   line-height: inherit;
   white-space: nowrap;
   font-size: 20px;
+  
 }
 
 .datetime #descDay {
@@ -236,13 +238,14 @@ li.active a:before{
 }
 
 .card .content{
-  padding: 0 15px 10px 15px;
+  padding: 15px 15px 0 15px;
 }
 
 .card .footer hr {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
+
 hr {
   border-color: #dcdcdc;
 }
@@ -250,7 +253,7 @@ hr {
 .card .footer{
   color: #7A7275;
   font-weight: lighter;
-  font-size: 14px;
+  font-size: 13px;
   font-family: Montserrat, sans-serif;
   margin-bottom: -8px;
   margin-top: -8px;
@@ -260,17 +263,23 @@ hr {
   font-size: 14px;
 }
 
+.card .dataItem {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: inline-flex;
+}
 .card .dataField{
   font-size: 60px;
 }
 
-.card .dataIcon.fa-tint, .card .dataIcon.fa-heat, .card .dataIcon.fa-lightbulb{
+.card .dataIcon.fa{
   color: #607288;
 }
 
 .card .dataIcon{
-  font-size: 70px;
-  margin-right: 5px;
+  font-size: 50px;
+  margin-right: 10px;
+  margin-top: 20px;
 }
 
 /* Esquema de colores actual:
@@ -323,8 +332,8 @@ hr {
 /* */
 
 #map {
-  height: 700px;
   margin: 0px;
+  height: 93vh;
 }
 
 .weather-data{
@@ -463,8 +472,8 @@ hr {
 .t-00{color: #ffffff;}
 .t-plus-05{color: #ffffd0;}
 .t-plus-10{color: #fee892;}
-.t-plus-15{color: #fee270;}
-.t-plus-20{color: #fdd461;}
+.dataIcon.t-plus-15{color: #fee270;}
+.dataIcon.t-plus-20{color: #fdd461;}
 .t-plus-25{color: #f4a85e;}
 .t-plus-30{color: #f48159;}
 .t-plus-35{color: #F57061;}
