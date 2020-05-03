@@ -1,5 +1,8 @@
-/*
-async function initMap() {
+async function initMapLeaflet() {
+	let json_apik = await getApiKeys();
+	
+	const api_key_ow = json_apik.API_KEY_OW;
+	const api_key_mapbox = json_apik.API_KEY_MAPBOX;
 
 	let mymap = L.map('map').setView([39.5494, 2.5502], 11);
 
@@ -20,7 +23,7 @@ async function initMap() {
 	}).addTo(mymap);
 
 	//TileLayer de Mapbox que muestra las calles
-	var mapboxStreetsTL = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+	var mapboxStreetsTL = L.tileLayer(`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${api_key_mapbox}`, {
 	    attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 	    maxZoom: 18,
 	    id: 'mapbox/streets-v11',
@@ -29,7 +32,25 @@ async function initMap() {
 	    accessToken: ''
 	});
 
-	var mapboxOutdorsTL = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+	var mapboxTerrainTL = L.tileLayer(`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${api_key_mapbox}`, {
+	    attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+	    maxZoom: 18,
+	    id: 'mapbox/mapbox.mapbox-terrain-v2',
+	    tileSize: 512,
+	    zoomOffset: -1,
+	    accessToken: ''
+	});
+
+	let trafficLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoicGxtYXBib3giLCJhIjoiY2s3MHkzZ3VnMDFlbDNmbzNiajN5dm9lOCJ9.nbbtDF54HIXo0mCiekVxng', {
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		id: 'plmapbox/ck860jimr0kf91ip8l61a5g00',
+		tileSize: 512,
+		zoomOffset: -1
+	});
+
+	var mapboxOutdorsTL = L.tileLayer(`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${api_key_mapbox}`, {
 	    attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 	    maxZoom: 18,
 	    id: 'mapbox/outdoors-v11',
@@ -38,25 +59,25 @@ async function initMap() {
 	    accessToken: ''
 	}).addTo(mymap);
 
-	var temp = L.tileLayer('http://{s}.tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=${apiKeyOW}&lang=es', {
+	var temp = L.tileLayer(`http://{s}.tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=${api_key_ow}&lang=es`, {
 		maxZoom: 200,
 	  attribution: '&copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
 	  id: 'temp'
 	});
 
-	var clouds = L.tileLayer('http://{s}.tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${apiKeyOW}&lang=es', {
+	var clouds = L.tileLayer(`http://{s}.tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${api_key_ow}&lang=es`, {
 		maxZoom: 200,
 	  attribution: '&copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
 	  id: 'clouds_new'
 	});
 
-	var precipitation = L.tileLayer('http://{s}.tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=${apiKeyOW}&lang=es', {
+	var precipitation = L.tileLayer(`http://{s}.tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=${api_key_ow}&lang=es`, {
 		maxZoom: 200,
 	  attribution: '&copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
 	  id: 'precipitation_new'
 	});
 
-	var wind = L.tileLayer('http://{s}.tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=${apiKeyOW}&lang=es', {
+	var wind = L.tileLayer(`http://{s}.tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=${api_key_ow}&lang=es`, {
 		maxZoom: 200,
 	  attribution: '&copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
 	  id: 'wind_new'
@@ -76,20 +97,22 @@ async function initMap() {
 	cities.addTo(mymap);
 
 	//Crea los grupos de capas base y overlay.
-	var baseMaps = {
+	let baseMaps = {
 	    "Grayscale": grayscale,
 	    "Calles": mapboxStreetsTL,
-	    "Elevacion": mapboxOutdorsTL
+			"Elevacion": mapboxOutdorsTL,
+			"Terreno": mapboxTerrainTL
 	};
-	var overlayMaps = {
+	let overlayMaps = {
 	    "Temperature": temp,
 	    "Clouds": clouds,
 	    "Precipitation": precipitation,
 	    "Wind": wind,
-	    "Cities": cities
+			"Cities": cities,
+			"Traffic": trafficLayer
 	};
 
-	var control = L.control.layers(baseMaps, overlayMaps).addTo(mymap);
+	const control = L.control.layers(baseMaps, overlayMaps).addTo(mymap);
 
 	ponerLeyenda();
 
@@ -221,9 +244,9 @@ function convertDate(timestamp){
 	// Will display time in 10:30:23 format
 	var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 	return formattedTime;
-}*/
+}
 
-async function initMap() {
+async function initMapbox() {
 	let navLat = 39.5661;
 	let navLong = 2.6484;
 	let json_apik = await getApiKeys();
@@ -250,15 +273,79 @@ async function initMap() {
 
 	//map.addControl(new mapboxgl.NavigationControl());
 	const nav = new mapboxgl.NavigationControl();
+	const geocoder = new MapboxGeocoder({
+		accessToken: api_key_mapbox,
+		mapboxgl: mapboxgl,
+		collapsed: true
+	});
+	let legend = new mapboxgl.legend();
+	map.addControl(geocoder, 'top-left');
 	map.addControl(nav, 'top-left');
+	map.addControl(legend, 'bottom-left');
 
 	var scale = new mapboxgl.ScaleControl({
     maxWidth: 100,
     unit: 'imperial'
 	});
 	map.addControl(scale);
-
 	scale.setUnit('metric');
+
+	map.on('load', function() {		 
+		// add source and layer for contours
+		map.addSource('contours', {
+			type: 'vector',
+			url: 'mapbox://mapbox.mapbox-terrain-v2'
+		});
+		map.addLayer({
+			'id': 'contours',
+			'type': 'line',
+			'source': 'contours',
+			'source-layer': 'contour',
+			'layout': {
+				// make layer visible by default
+				'visibility': 'visible',
+				'line-join': 'round',
+				'line-cap': 'round'
+			},
+			'paint': {
+				'line-color': '#877b59',
+				'line-width': 1
+			}
+		});
+				
+	});
+
+	let toggleableLayerIds = ['contours'];
+ 
+	// set up the corresponding toggle button for each layer
+	for (var i = 0; i < toggleableLayerIds.length; i++) {
+	var id = toggleableLayerIds[i];
+	
+	var link = document.createElement('a');
+	link.href = '#';
+	link.className = 'active';
+	link.textContent = id;
+	
+	link.onclick = function(e) {
+		var clickedLayer = this.textContent;
+		e.preventDefault();
+		e.stopPropagation();
+		
+		var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+		
+		// toggle layer visibility by changing the layout object's visibility property
+		if (visibility === 'visible') {
+			map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+			this.className = '';
+		} else {
+			this.className = 'active';
+			map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+		}
+	};
+	
+	var layers = document.getElementById('menu');
+	layers.appendChild(link);
+	}
 }
 
 async function getApiKeys(){

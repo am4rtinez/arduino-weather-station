@@ -6,40 +6,12 @@ const fs = require('fs')
 const https = require('https')
 const mariadb = require('./database');
 const cors = require('cors');
-const path = require('path');
 const app = express();
-const expressLayouts = require('express-ejs-layouts');
+
 
 //app.listen(3000, () => console.log('App listening on port 3000! Go to http://localhost:3000/'))
-//app.use(cors())
+app.use(cors())
 app.use(express.static('frontend'))
-
-// set the view engine to ejs
-app.set('views', path.join(__dirname, '../frontend/views'));
-app.set('view engine', 'ejs');
-app.use(expressLayouts);
-
-app.get('/', function(req, res) {
-	res.render('pages/index');
-});
-app.get('/temperature', function(req, res) {
-	res.render('pages/temperature');
-});
-app.get('/humidity', function(req, res) {
-	res.render('pages/humidity');
-});
-app.get('/pressure', function(req, res) {
-	res.render('pages/pressure');
-});
-app.get('/brightness', function(req, res) {
-	res.render('pages/brightness');
-});
-app.get('/openweather', function(req, res) {
-	res.render('pages/openweather');
-});
-app.get('/mapping', function(req, res) {
-	res.render('pages/mapping');
-});
 
 //Config headers & cors
 
