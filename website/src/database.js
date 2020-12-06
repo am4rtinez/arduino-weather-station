@@ -16,6 +16,8 @@ const pool = mariadb.createPool({
   connectionLimit: 5
 });
 
+console.log(process.env.DB_PASSWORD);
+
 module.exports.getDataDB = async (query) => {
   switch(query) {
     case 'lastTemp':

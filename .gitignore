@@ -2,5 +2,6 @@ node_modules
 .env
 composer.json
 composer.lock
-server.cert
+server.crt
 server.key
+website-old/
