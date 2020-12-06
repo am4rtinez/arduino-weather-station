@@ -19,8 +19,6 @@ app.use(morgan('dev'));
 //Routes
 app.use(require('./routes'));
 
-//Public
-
 //start
 app.use((req, res, next) => {
 	res.header('Access-Control-Allow-Origin', '*');
