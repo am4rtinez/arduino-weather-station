@@ -25,6 +25,7 @@ router.get('/current_weather_OW/:id', async (request, response) =>{
 	const apiKey = process.env.API_KEY_OW;
 	const apiURL = `http://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${apiKey}&units=metric&lang=es`
 	const fetch_response = await fetch(apiURL);
+	console.log(apiURL);
 	const json = await fetch_response.json();
   response.json(json);
 }); 
@@ -33,6 +34,7 @@ router.get('/forecast_OW/:id', async (request, response) =>{
 	let cityId = request.params.id;
 	const apiKey = process.env.API_KEY_OW;
 	const apiURL = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${apiKey}&units=metric&lang=es&cnt=5`
+	console.log(apiURL);
 	const fetch_response = await fetch(apiURL);
 	const json = await fetch_response.json();
   response.json(json);

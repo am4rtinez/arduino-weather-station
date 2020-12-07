@@ -10,9 +10,11 @@ import openweatherView from '../views/openweather.js';
 import mappingView from '../views/mapping.js';
 import aboutView from '../views/about.js';
 import profileView from '../views/profile.js';
+import owDataView from '../views/owdata.js';
 
 const routes = [
     new Route('home', '/', homeView),
+    new Route('owdata', '/owdata', owDataView),
     new Route('temperature', '/temperature', temperatureView),
     new Route('humidity', '/humidity', humidityView),
     new Route('pressure', '/pressure', pressureView),

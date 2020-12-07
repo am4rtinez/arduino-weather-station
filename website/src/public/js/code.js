@@ -53,13 +53,16 @@ $(document).ready(function(){
 	$('#dashboardLink').click(function(){
 		dashboardLoad();
 	});
+	$('#owDataLink').click(function(){
+		loadOWData();
+	});
 	$('#tempLink').click(function(){
 		loadTempChart();
 	});
 	$('#humidityLink').click(function(){
 		loadHumChart();
 	});
-
+	
 	//getData();
 
 	/*async function showLatestData(item, url, field, units){
@@ -102,6 +105,31 @@ function dashboardLoad(){
 	loadHumChart();
 }
 
+async function loadOWData(){
+	const url = 'current_weather_OW/2512989';
+	const item = document.getElementsByClassName('owData');
+	const response = await fetch(url);
+	const json = await response.json();
+	let urlIcon =`http://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png`;
+	let time = convertTime(json.dt);
+	console.log(time);
+
+	$(item).html(`
+		<div class="card-header">Condiciones Actuales</div>
+		<div class="card-body">
+			<p>Ciudad: ${json.name}</p>
+			<p>Longitud: ${json.coord.lon}</p>
+			<p>Latitud: ${json.coord.lat}</p>
+			<p>${json.weather[0].main}</p>
+			<p>${json.weather[0].description}</p>
+		</div>
+		<div class="card-footer text-center"> 
+			<i class="fad fa-sync"></i> Ultima actualizacion: <span class="updated-time">${time}</span>
+		</div>`
+	);
+
+}
+
 async function loadTempChart(){
 	getDataJSON(url_temp_query, "temperature", "tempChart", "#FE2E2E");
 }
@@ -117,14 +145,13 @@ async function showCurrentStatus(url){
 	let urlIcon =`http://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png`;
 	let time = convertTime(json.dt);
 	
-	$(item).html(`<div class="content">
-		<div class="col text-center">
-			<img src="${urlIcon}" alt="${json.weather[0].description.charAt(0).toUpperCase() + json.weather[0].description.slice(1)}" width="110px"><br>
-		</div>
-		<hr>
-		<div class="footer text-center">
-		<i class="fad fa-sync"></i> <span class="updated_time">${convertTime(json.dt)}</span>
-		</div>`
+	$(item).html(`
+		<div class="content">
+			<div class="col text-center">
+				<b><span class="text-center">${convertTime(json.dt)}</span></b><br>
+				<img src="${urlIcon}" alt="${json.weather[0].description.charAt(0).toUpperCase() + json.weather[0].description.slice(1)}" width="110px"><br>
+				<span class="">${jitem.main.temp}ºC</span>
+			</div>`
 	);
 
 	//Imprime ultimos datos en los cards correspondientes. lastTempData lastHumData lastPressData lastBrigData lastWindData
@@ -151,6 +178,7 @@ async function getForecastData(item,url){
 				<span class="">${jitem.main.temp}ºC</span>
 			</div>`;
 	}
+	
 	$(item).html(`${string}</div></div>`);
 }
 
@@ -225,11 +253,11 @@ async function getDataJSON(url, labeling, chart_id, color){
 function printChart(item, data){
 	Chart.defaults.global.defaultFontFamily = "Montserrat";
 	Chart.defaults.global.defaultFontColor = "#000000";
-		const myLineChart = new Chart(document.getElementById(item).getContext("2d") , {
-				type: "line",
-				data: data,
-				options 
-		});
+	const myLineChart = new Chart(document.getElementById(item).getContext("2d") , {
+		type: "line",
+		data: data,
+		options 
+	});
 }
 
 function convertTime(timestamp){
