@@ -5,3 +5,4 @@ composer.lock
 server.crt
 server.key
 website-old/
+website/openweatherData.json
