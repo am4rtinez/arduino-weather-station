@@ -47,13 +47,18 @@ const options = {
 		datasetFill : true,       
 };
 
+getapikeys();
+
 $(function(){
 
-	getapikeys();
-
+	//Carga las funciones en funcion de la localización de la URL.
 	if (location.hash === '#/') {
 		dashboardLoad();
-	} else if (location.hash === '#/mapping'){
+	} 
+	else if (location.hash === '#/owdata'){
+		loadOWData();
+	}
+	else if (location.hash === '#/mapping'){
 		initMapboxJS();
 	}
 
