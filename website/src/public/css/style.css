@@ -335,8 +335,50 @@ hr {
 
 #map {
   margin: 0px;
-  height: 93vh;
+  height: 100%;
 }
+
+#menu {
+  background: #fff;
+  position: absolute;
+  z-index: 1;
+  top: 10px;
+  right: 10px;
+  border-radius: 3px;
+  width: 120px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  font-family: 'Open Sans', sans-serif;
+  }
+   
+  #menu a {
+  font-size: 13px;
+  color: #404040;
+  display: block;
+  margin: 0;
+  padding: 0;
+  padding: 10px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  text-align: center;
+  }
+   
+  #menu a:last-child {
+  border: none;
+  }
+   
+  #menu a:hover {
+  background-color: #f8f8f8;
+  color: #404040;
+  }
+   
+  #menu a.active {
+  background-color: #3887be;
+  color: #ffffff;
+  }
+   
+  #menu a.active:hover {
+  background: #3074a4;
+  }
 
 .weather-data{
   margin-left: -6px;
@@ -482,3 +524,11 @@ hr {
 .t-plus-40{color: #f46859;}
 .t-plus-45{color: #f44c49;}
 .t-plus-50{color: #F5231F;}
+
+.leaflet-touch.leaflet-fullscreen-on .leaflet-control-fullscreen a {
+   background-position: 0px -26px;
+}
+
+.leaflet-touch .leaflet-control-fullscreen a {
+  background-position: 0px 0px;
+}

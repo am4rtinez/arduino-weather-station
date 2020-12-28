@@ -6,3 +6,4 @@ server.crt
 server.key
 website-old/
 website/openweatherData.json
+website/src/keys/server.cert

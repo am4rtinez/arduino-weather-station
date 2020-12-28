@@ -36,10 +36,10 @@ export default class Router {
         const route = this.routes.filter(route => this.match(route, path))[0];
         if(!route) this.renderNode.innerHTML = "404! Page not found";
         else {
-						window.location.href = path.search('/#') === -1 ? '#' + path : path;
-						this.renderNode.innerHTML = route.renderView(); // innerHTML must be avoided
-						$('.nav-item').removeClass('active');
-						$('.nav-item > a[target="'+path+'"]').parent().addClass('active');
+            window.location.href = path.search('/#') === -1 ? '#' + path : path;
+            this.renderNode.innerHTML = route.renderView(); // innerHTML must be avoided
+            $('.nav-item').removeClass('active');
+            $('.nav-item > a[target="'+path+'"]').parent().addClass('active');
         }
     }
 

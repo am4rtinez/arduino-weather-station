@@ -6,14 +6,28 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="author" content="Ángel Martínez">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- jQuery library -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> <!-- Latest compiled bootstrap -->
+
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css">
+    
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> <!-- Popper JS -->
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css" integrity="sha512-SUJFImtiT87gVCOXl3aGC00zfDl6ggYAw5+oheJvRJ8KBXZrr/TMISSdVJ5bBarbQDRC2pR5Kto3xTR0kpZInA==" crossorigin="anonymous" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script> <!--Libreria Chart.js-->
+  
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
+  
+  <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
+  <link rel='stylesheet' href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' />
+  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css" type="text/css" />
+  <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
   <script src="js/time.js"></script>
   <script src="js/code.js"></script>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<div class="wrapper">
@@ -30,14 +44,10 @@
             <li class="nav-item"><a id="humidityLink" href="" target="/humidity"><i class="fa fa-tint"></i>Humedad</a></li>
             <li class="nav-item"><a href="" target="/pressure" title=""><i class="fa fa-heat"></i>Presion</a></li>
             <li class="nav-item"><a href="" target="/brightness" title=""><i class="fa fa-lightbulb"></i>Luminosidad</a></li>
-            <li class="nav-item"><a href="" target="/openweather" title=""><i class="fa fa-cloud-sun"></i>OpenWeatherMap</a></li>
-            <li class="nav-item"><a href="" target="/mapping" title=""><i class="fa fa-map-marked-alt"></i>Mapas</a></li>
+            <li class="nav-item"><a id="mappingLink" href="" target="/mapping" title=""><i class="fa fa-map-marked-alt"></i>Mapas</a></li>
           </ul>
         </nav>
         <div class="container status text-center">
-          <!--<div class="show-temp">
-            <span class="temp-data">23</span><span class="units">ºC</span>
-          </div> -->
           <div class="datetime">
             <i class="fa fa-calendar-alt"></i><span id="descDay">Lunes </span><span id="day">20 </span><span id="month">Abril </span>
           </div>

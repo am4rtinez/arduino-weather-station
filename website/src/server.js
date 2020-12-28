@@ -15,9 +15,8 @@ app.use(morgan('dev'));
 
 //Global var
 
-
 //Routes
-app.use(require('./routes'));
+app.use('/api', require('./routes/index'));
 
 //start
 app.use((req, res, next) => {

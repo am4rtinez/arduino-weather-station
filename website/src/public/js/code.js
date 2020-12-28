@@ -1,7 +1,9 @@
-const url_temp_query = 'query/temp20';
-const url_hum_query = 'query/hum20';
-const url_pressure_query = 'query/press20';
-const url_brightness_query = 'query/brig20';
+const url_temp_query = 'api/getquery/temp20';
+const url_hum_query = 'api/getquery/hum20';
+const url_pressure_query = 'api/getquery/press20';
+const url_brightness_query = 'api/getquery/brig20';
+let api_key_mapbox = '';
+let api_key_ow = '';
 
 const options = {
 	legend: {
@@ -45,11 +47,17 @@ const options = {
 		datasetFill : true,       
 };
 
-$(document).ready(function(){
+$(function(){
 
-	//Carga el dashboard por primera vez cuando se inicia la web
-	dashboardLoad();
+	getapikeys();
 
+	if (location.hash === '#/') {
+		dashboardLoad();
+	} else if (location.hash === '#/mapping'){
+		initMapboxJS();
+	}
+
+	//Añade evento de clicado para cargar la vista en el main-panel.
 	$('#dashboardLink').click(function(){
 		dashboardLoad();
 	});
@@ -62,41 +70,22 @@ $(document).ready(function(){
 	$('#humidityLink').click(function(){
 		loadHumChart();
 	});
-	
-	//getData();
-
-	/*async function showLatestData(item, url, field, units){
-		const response = await fetch(url);
-		const json = await response.json();
-		let date=new Date(json[0].date);
-		let hours = (date.getHours() < 10) ? "0" + date.getHours() : date.getHours();
-		let minutes = (date.getMinutes() < 10) ? "0" + date.getMinutes() : date.getMinutes();
-		let formattedTime = hours + ':' + minutes;
-		let htmlCode = `<div class="content text-center"><div class="dataItem">`;
-		switch (field) {
-			case 'temperature':
-				htmlCode = `${htmlCode}${setTempIcon(json[0][field])}`;
-			break;
-			case 'humidity':
-				htmlCode = `${htmlCode}<i class="fa fa-tint dataIcon"></i>`;
-			break;
-			case 'pressure':
-				htmlCode = `${htmlCode}<i class="fa fa-heat dataIcon"></i>`;
-			break;
-			case 'brightness':
-				htmlCode = `${htmlCode}<i class="fa fa-lightbulb dataIcon"></i>`;
-			break;
-
-		}
-		$(item).html(`${htmlCode}<span class="dataField">${json[0][field]}</span><span class="units">${units}</span></div></div>
-		<hr><div class="footer"><i class="fad fa-sync"></i> Ultima actualizacion: <span class="updated_time">${formattedTime}</span></div>`);
-	} */
+	$('#mappingLink').click(function(){
+		initMapboxJS();
+	});
 
 });
 
+async function getapikeys(){
+	const response = await fetch('api/getapikeys');
+	const json = await response.json();
+	api_key_mapbox = json['API_KEY_MAPBOX'];
+	api_key_ow = json['API_KEY_OW'];
+}
+
 function dashboardLoad(){
-	showCurrentStatus('current_weather_OW/2512989');
-	getForecastData(document.getElementsByClassName('dataForecast'),'forecast_OW/2512989');
+	showCurrentStatus('api/current_weather_OW/2512989');
+	getForecastData(document.getElementsByClassName('dataForecast'),'api/forecast_OW/2512989');
 	//getLatestData(document.getElementsByClassName('lastTempData'), 'query/lastTemp', 'temperature', 'ºC');
 	//getLatestData(document.getElementsByClassName('lastHumData'), 'query/lastHum', 'humidity', '%');
 	//getLatestData(document.getElementsByClassName('lastPressData'), 'query/lastPress', 'pressure', 'hPa');
@@ -106,13 +95,12 @@ function dashboardLoad(){
 }
 
 async function loadOWData(){
-	const url = 'current_weather_OW/2512989';
+	const url = 'api/current_weather_OW/2512989';
 	const item = document.getElementsByClassName('owData');
 	const response = await fetch(url);
 	const json = await response.json();
 	let urlIcon =`http://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png`;
 	let time = convertTime(json.dt);
-	console.log(time);
 
 	$(item).html(`
 		<div class="card-header">Condiciones Actuales</div>
@@ -145,14 +133,14 @@ async function showCurrentStatus(url){
 	let urlIcon =`http://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png`;
 	let time = convertTime(json.dt);
 	
-	$(item).html(`
+	/*$(item).html(`
 		<div class="content">
 			<div class="col text-center">
 				<b><span class="text-center">${convertTime(json.dt)}</span></b><br>
 				<img src="${urlIcon}" alt="${json.weather[0].description.charAt(0).toUpperCase() + json.weather[0].description.slice(1)}" width="110px"><br>
 				<span class="">${jitem.main.temp}ºC</span>
 			</div>`
-	);
+	);*/
 
 	//Imprime ultimos datos en los cards correspondientes. lastTempData lastHumData lastPressData lastBrigData lastWindData
 	showLatestData(document.getElementsByClassName('lastTempData'), 'temperature', 'ºC', time, json.main.temp);
@@ -335,3 +323,98 @@ function setTempIcon (temperatura) {
 		return (html);
 }
 
+function initMapboxJS() {
+	console.log(document.baseURI);
+	//console.log(location.pathname + location.hash);
+	let navLat = 39.590;
+	let navLong = 2.796;
+	
+	L.mapbox.accessToken = api_key_mapbox;
+	/*
+	// Create a map in the div #map
+	if ("geolocation" in navigator) {
+		// la geolocalización está disponible
+		navigator.geolocation.getCurrentPosition(position => {
+			console.log(position.coords);
+		});
+	} else {
+		// la geolocalización NO está disponible
+		console.log("Geolocation is not suitable");
+	}*/
+
+	//Inicializa el mapa.
+	var map = L.mapbox.map('map', null, { zoomControl: false });
+	map.setView([navLat, navLong], 9.8);
+
+	var basemaps = {
+		'Mapbox Outdoors': L.mapbox.styleLayer('mapbox://styles/mapbox/outdoors-v11').addTo(map),
+		'Mapbox Streets': L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'),
+		'Mapbox Satellite': L.mapbox.styleLayer('mapbox://styles/mapbox/satellite-v9'),
+		'Mapbox Light': L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'),
+		'Mapbox Dark': L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'),
+		'Mapbox Sprite': L.mapbox.styleLayer('mapbox://styles/mapbox/bright-v8')
+	}
+
+	//Add mapbox contours mapbox://mapbox.mapbox-terrain-v2
+	var templayer = L.tileLayer('http://{s}.tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid='+ api_key_ow +'&lang=es', {
+		maxZoom: 18,
+	  	attribution: '&copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
+	  	id: 'temp'
+	})
+
+	var cloudslayer = L.tileLayer('http://{s}.tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid='+ api_key_ow +'&lang=es', {
+		maxZoom: 18,
+	  	attribution: '&copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
+	  	id: 'clouds'
+	})
+
+	var precipitationlayer = L.tileLayer('http://{s}.tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid='+ api_key_ow +'&lang=es', {
+		maxZoom: 18,
+	  	attribution: '&copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
+	  	id: 'temp'
+	})
+
+	var pressurelayer = L.tileLayer('http://{s}.tile.openweathermap.org/map/pressure_new/{z}/{x}/{y}.png?appid='+ api_key_ow +'&lang=es', {
+		maxZoom: 18,
+	  	attribution: '&copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
+	  	id: 'temp'
+	})
+
+	var windlayer = L.tileLayer('http://{s}.tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid='+ api_key_ow +'&lang=es', {
+		maxZoom: 18,
+	  	attribution: '&copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
+	  	id: 'temp'
+	})
+
+	var overlaymaps = {
+		"Temperatura"	:	templayer,
+		"Nubes"			:	cloudslayer,
+		"Lluvia"		:	precipitationlayer,
+		"Presion Atm"	:	pressurelayer,
+		"Viento"		:	windlayer
+	}
+
+	L.control.layers(basemaps, overlaymaps).addTo(map);
+
+	var geocoder = L.mapbox.geocoderControl('mapbox.places');
+
+	//Inicializa el componente de escala.
+	var scale = null;
+
+	//Inicializa componente de fullscreen
+	//map.addControl(new L.Control.Fullscreen());
+
+	//Inicializa componente geolocalización.
+	var geolocate =  null;
+	//scale.setUnit('metric');
+
+	//let legend = new mapboxgl.legend();
+	map.addControl(geocoder, 'top-left');
+	map.addControl(new L.Control.Zoom(), 'top-left');
+	map.addControl(new L.Control.Fullscreen(),'top-left');
+	//map.addControl(geolocate, 'top-left');
+	map.addControl(L.mapbox.shareControl(), 'top-left');
+	map.addControl(L.mapbox.legendControl(), 'bottom-right');
+	map.addControl(L.control.scale({metric: true, imperial: false}), 'bottom-left');
+
+}

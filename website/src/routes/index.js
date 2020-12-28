@@ -5,14 +5,12 @@ const fetch = require('node-fetch');
 const router = express.Router();
 
 router.get('/weather_cities', async (request, response) => {
-
 	const cityIDs = "2512989,2514097,2520493,2514216,2521741,2516452,2510821,2512432,2521534,2511106,2514984";
 	const apiKey = process.env.API_KEY_OW;
 	const apiURL = `http://api.openweathermap.org/data/2.5/group?id=${cityIDs}&units=metric&lang=es&appid=${apiKey}`;
 	const fetch_response = await fetch(apiURL);
 	const json_cities = await fetch_response.json();
-  response.json(json_cities.list);
-
+  	response.json(json_cities.list);
 });
 
 /*
@@ -51,7 +49,7 @@ router.get('/forecast_OW/:id', async (request, response) =>{
 	press20 - Obtiene los últimos 20 datos de presión atmosférica.
 	brig20 - Obtiene los últimos 20 datos de luminosidad.
 */
-router.get('/query/:query', (request, response) => {
+router.get('/getquery/:query', (request, response) => {
 	mariadb.getDataDB(request.params.query)
 			.then(data => response.status(200).json(data))
 			.catch(err => response.json(err))
