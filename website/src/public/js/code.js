@@ -389,14 +389,63 @@ function initMapboxJS() {
 		maxZoom: 18,
 	  	attribution: '&copy; <a href="https://openweathermap.org">OpenWeatherMap</a>',
 	  	id: 'temp'
-	})
+	});
+
+	// Servei de mapa de les zones bàsiques de salut de les Illes Balears
+	// URL: http://ideib.caib.es/cataleg/srv/cat/catalog.search#/metadata/cd39adff-7eea-4590-b9d8-ee5b772f78f5
+	//- Zona Sanitària (ZBS_ZonaSanitaria): Zonificació de la cobertura dels centres sanitaris públicsque surt a partir de les unitats de les targetes sanitàries que amb el seu carrerer delimita les zones.
+	//- Equipaments sanitaris (ZBS_EquipamentSanitari): Localització puntual dels centres sanitaris públics (centres sanitaris i unitats bàsiques de salut) de les Illes Balears. Alguns centres d'aquesta capa no coincideixen amb les zones bàsiques de salut vigents perquè estan pendents de construcció o inauguració.
+	//- Equipaments hospitalaris (ZBS_EquipamentHospitalari): Localització puntual dels establiment on es proporciona assistència mèdica i sanitària completa.
+	var zbs_zsanit = L.tileLayer.wms('https://ideib.caib.es/geoserveis/services/public/GOIB_ZBS_IB/MapServer/WMSServer?', {
+		layers: '0',
+		format: 'image/png',
+		transparent: true,
+		opacity: 0.5,
+		attribution: "© IDEIB-SITIBSA"
+	});
+	var zbs_esanit = L.tileLayer.wms('https://ideib.caib.es/geoserveis/services/public/GOIB_ZBS_IB/MapServer/WMSServer?', {
+		layers: '1',
+		format: 'image/png',
+		transparent: true,
+		attribution: "© IDEIB-SITIBSA"
+	});
+	var zbs_ehospit = L.tileLayer.wms('https://ideib.caib.es/geoserveis/services/public/GOIB_ZBS_IB/MapServer/WMSServer?', {
+		layers: '2',
+		format: 'image/png',
+		transparent: true,
+		attribution: "© IDEIB-SITIBSA"
+	});
+	// CDE Registre desfibril·ladors externs semiautomàtics (DESA) 
+	// Localització dels DESA del Registre de desfibril·ladors externs semiautomàtics (DESA) que recull les persones físiques o jurídiques, públiques o privades, registrats per part de la Direccio General d'Avaluació i Acreditació. El Decret 137/2008, de 12 de desembre, regula l'ús de desfibril·ladors externs semiautomàtics (DESA) en centres no sanitaris de les Illes Balears. Cal advertir hi ha alguns DESA georeferenciats únicament a nivell de via. Darrera actualització segons dades de juny de 2020.
+	var desa = L.tileLayer.wms('https://ideib.caib.es/geoserveis/services/public/GOIB_Salut_IB/MapServer/WMSServer?', {
+		layers: '0',
+		format: 'image/png',
+		transparent: true,
+		attribution: "© IDEIB-SITIBSA"
+	});
+	
+	// CDE Red hidrográfica de las "Illes Balears" (capa provisional) 
+	// URL: http://ideib.caib.es/cataleg/srv/spa/catalog.search;jsessionid=128BDA9BD989C0A8B103D6F2E1EAFB61#/metadata/88FBE74D-D15E-429E-9840-B7B2D128FCC0
+	// Red hidrográfica provisional de las "Illes Balears" que representa los cursos hidrográficos que han podido ser detectados por restitución fotogramétrica a escala 1:5.000 (mayoritariamente a partir de fotografía aérea, aunque, en algunos casos, también se ha realizado trabajo de campo) . No se trata de una "red hidrológica" completamente conectada.
+	var hidroIB = L.tileLayer.wms('https://ideib.caib.es/geoserveis/services/public/GOIB_Hidrografia_IB/MapServer/WMSServer?', {
+		layers: '0',
+		format: 'image/png',
+		transparent: true,
+		opacity: 0.6,
+		attribution: "© IDEIB-SITIBSA"
+	});
 
 	var overlaymaps = {
 		"Temperatura"	:	templayer,
 		"Nubes"			:	cloudslayer,
 		"Lluvia"		:	precipitationlayer,
 		"Presion Atm"	:	pressurelayer,
-		"Viento"		:	windlayer
+		"Viento"		:	windlayer,
+		"Zona Sanit"	:	zbs_zsanit,
+		"Equip Sanit"	:	zbs_esanit,
+		"Equip Hospit"	:	zbs_ehospit,
+		"Desa"			:	desa,
+		"Hidrografia"	:	hidroIB
 	}
 
 	L.control.layers(basemaps, overlaymaps).addTo(map);
@@ -406,20 +455,15 @@ function initMapboxJS() {
 	//Inicializa el componente de escala.
 	var scale = null;
 
-	//Inicializa componente de fullscreen
-	//map.addControl(new L.Control.Fullscreen());
-
 	//Inicializa componente geolocalización.
 	var geolocate =  null;
-	//scale.setUnit('metric');
-
 	//let legend = new mapboxgl.legend();
 	map.addControl(geocoder, 'top-left');
 	map.addControl(new L.Control.Zoom(), 'top-left');
 	map.addControl(new L.Control.Fullscreen(),'top-left');
 	//map.addControl(geolocate, 'top-left');
 	map.addControl(L.mapbox.shareControl(), 'top-left');
-	map.addControl(L.mapbox.legendControl(), 'bottom-right');
+	//map.addControl(L.mapbox.legendControl(), 'bottom-right');
 	map.addControl(L.control.scale({metric: true, imperial: false}), 'bottom-left');
 
 }

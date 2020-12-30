@@ -64,5 +64,13 @@ router.get('/getapikeys', (request, response) => {
 	response.json(data);
 })
 
+router.get('/mr_5d_forecast', async (request, response) => {
+	const cityID = "1126"; //Id para Palma de Mallorca.
+	const apiKey = process.env.API_KEY_METEORED;
+	const apiURL = `http://api.tiempo.com/index.php?api_lang=es&localidad=${cityID}&affiliate_id=${apiKey}&v=3.0`;
+	const fetch_response = await fetch(apiURL);
+	const json_fcst = await fetch_response.json();
+  	response.json(json_fcst);
+});
 
 module.exports = router;
