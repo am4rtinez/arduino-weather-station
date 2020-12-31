@@ -329,7 +329,6 @@ function setTempIcon (temperatura) {
 }
 
 function initMapboxJS() {
-	console.log(document.baseURI);
 	//console.log(location.pathname + location.hash);
 	let navLat = 39.590;
 	let navLong = 2.796;
@@ -396,42 +395,77 @@ function initMapboxJS() {
 	//- Zona Sanitària (ZBS_ZonaSanitaria): Zonificació de la cobertura dels centres sanitaris públicsque surt a partir de les unitats de les targetes sanitàries que amb el seu carrerer delimita les zones.
 	//- Equipaments sanitaris (ZBS_EquipamentSanitari): Localització puntual dels centres sanitaris públics (centres sanitaris i unitats bàsiques de salut) de les Illes Balears. Alguns centres d'aquesta capa no coincideixen amb les zones bàsiques de salut vigents perquè estan pendents de construcció o inauguració.
 	//- Equipaments hospitalaris (ZBS_EquipamentHospitalari): Localització puntual dels establiment on es proporciona assistència mèdica i sanitària completa.
-	var zbs_zsanit = L.tileLayer.wms('https://ideib.caib.es/geoserveis/services/public/GOIB_ZBS_IB/MapServer/WMSServer?', {
+	var zbs_zsanit = L.tileLayer.betterWms('https://ideib.caib.es/geoserveis/services/public/GOIB_ZBS_IB/MapServer/WMSServer?', {
 		layers: '0',
 		format: 'image/png',
 		transparent: true,
 		opacity: 0.5,
 		attribution: "© IDEIB-SITIBSA"
 	});
-	var zbs_esanit = L.tileLayer.wms('https://ideib.caib.es/geoserveis/services/public/GOIB_ZBS_IB/MapServer/WMSServer?', {
+	var zbs_esanit = L.tileLayer.betterWms('https://ideib.caib.es/geoserveis/services/public/GOIB_ZBS_IB/MapServer/WMSServer?', {
 		layers: '1',
 		format: 'image/png',
 		transparent: true,
 		attribution: "© IDEIB-SITIBSA"
 	});
-	var zbs_ehospit = L.tileLayer.wms('https://ideib.caib.es/geoserveis/services/public/GOIB_ZBS_IB/MapServer/WMSServer?', {
+	var zbs_ehospit = L.tileLayer.betterWms('https://ideib.caib.es/geoserveis/services/public/GOIB_ZBS_IB/MapServer/WMSServer?', {
 		layers: '2',
 		format: 'image/png',
 		transparent: true,
 		attribution: "© IDEIB-SITIBSA"
 	});
-	// CDE Registre desfibril·ladors externs semiautomàtics (DESA) 
+	// CDE Registre desfibril·ladors externs semiautomàtics (DESA)
+	// URL: http://ideib.caib.es/cataleg/srv/cat/catalog.search;jsessionid=94C1836C02A2C5F3D4D7648687CDEB8D#/metadata/EAB67586-47DC-42C4-8031-4E26C8F33E45
 	// Localització dels DESA del Registre de desfibril·ladors externs semiautomàtics (DESA) que recull les persones físiques o jurídiques, públiques o privades, registrats per part de la Direccio General d'Avaluació i Acreditació. El Decret 137/2008, de 12 de desembre, regula l'ús de desfibril·ladors externs semiautomàtics (DESA) en centres no sanitaris de les Illes Balears. Cal advertir hi ha alguns DESA georeferenciats únicament a nivell de via. Darrera actualització segons dades de juny de 2020.
-	var desa = L.tileLayer.wms('https://ideib.caib.es/geoserveis/services/public/GOIB_Salut_IB/MapServer/WMSServer?', {
+	var desa = L.tileLayer.betterWms('https://ideib.caib.es/geoserveis/services/public/GOIB_Salut_IB/MapServer/WMSServer?', {
 		layers: '0',
 		format: 'image/png',
 		transparent: true,
 		attribution: "© IDEIB-SITIBSA"
 	});
+
+	var desa = L.tileLayer.betterWms('https://ideib.caib.es/geoserveis/services/public/GOIB_Salut_IB/MapServer/WMSServer?', {
+        layers: '0',
+        transparent: true,
+		format: 'image/png',
+		attribution: "© IDEIB-SITIBSA"
+    });
 	
 	// CDE Red hidrográfica de las "Illes Balears" (capa provisional) 
 	// URL: http://ideib.caib.es/cataleg/srv/spa/catalog.search;jsessionid=128BDA9BD989C0A8B103D6F2E1EAFB61#/metadata/88FBE74D-D15E-429E-9840-B7B2D128FCC0
 	// Red hidrográfica provisional de las "Illes Balears" que representa los cursos hidrográficos que han podido ser detectados por restitución fotogramétrica a escala 1:5.000 (mayoritariamente a partir de fotografía aérea, aunque, en algunos casos, también se ha realizado trabajo de campo) . No se trata de una "red hidrológica" completamente conectada.
-	var hidroIB = L.tileLayer.wms('https://ideib.caib.es/geoserveis/services/public/GOIB_Hidrografia_IB/MapServer/WMSServer?', {
+	var hidroIB = L.tileLayer.betterWms('https://ideib.caib.es/geoserveis/services/public/GOIB_Hidrografia_IB/MapServer/WMSServer?', {
 		layers: '0',
 		format: 'image/png',
 		transparent: true,
 		opacity: 0.6,
+		attribution: "© IDEIB-SITIBSA"
+	});
+
+	// CDE Producció i distribució energètica a les Illes Balears
+	// Conjunt de dades espacials format pels elements de la xarxa de producció energètica del les Illes Balears; centrals convencionals, de cogeneració, parcs eòlics i parcs fotovoltaics, així com, els elements que configuren la distribució energètica; la xarxa de distribució d'electricitat, les subestacions i els gasoductes. Alguns elements d’aquest conjunt de dades espacials només són accessibles pels usuaris autoritzats pel propietari de les dades.
+	var energia = L.tileLayer.betterWms('https://ideib.caib.es/geoserveis/services/public/GOIB_ProdDistr_energia_IB/MapServer/WmsServer?', {
+		layers: '0,1,2,3,4',
+		format: 'image/png',
+		transparent: true,
+		attribution: "© IDEIB-SITIBSA"
+	});
+
+	// CDE Aptitud per a ubicar instal·lacions fotovoltaiques i eòliques a les Illes Balears
+	// URL: https://ideib.caib.es/geoserveis/rest/services/public/GOIB_Fotovo_Eol_IB/MapServer
+	// Conjunt de dades espacials que zonifica l'aptitud del territori de les Illes Balears per ubicar instal·lacions de producció d'energia fotovoltaica o eòlica relativa al Pla Director d'Energies Renovables de les Illes Balears a escala 1:25.000 de 2014.
+	var aptitudfoto = L.tileLayer.betterWms('https://ideib.caib.es/geoserveis/services/public/GOIB_Fotovo_Eol_IB/MapServer/WmsServer?', {
+		layers: '0',
+		format: 'image/png',
+		transparent: true,
+		opacity: 0.7,
+		attribution: "© IDEIB-SITIBSA"
+	});
+	var aptitudeol = L.tileLayer.betterWms('https://ideib.caib.es/geoserveis/services/public/GOIB_Fotovo_Eol_IB/MapServer/WmsServer?', {
+		layers: '1',
+		format: 'image/png',
+		transparent: true,
+		opacity: 0.7,
 		attribution: "© IDEIB-SITIBSA"
 	});
 
@@ -445,7 +479,10 @@ function initMapboxJS() {
 		"Equip Sanit"	:	zbs_esanit,
 		"Equip Hospit"	:	zbs_ehospit,
 		"Desa"			:	desa,
-		"Hidrografia"	:	hidroIB
+		"Hidrografia"	:	hidroIB,
+		"Prod / Dist Energetica"	: energia,
+		"Aptitud Fotovoltaica"	:	aptitudfoto,
+		"Aptitud Eolica"	:	aptitudeol,
 	}
 
 	L.control.layers(basemaps, overlaymaps).addTo(map);
@@ -463,7 +500,7 @@ function initMapboxJS() {
 	map.addControl(new L.Control.Fullscreen(),'top-left');
 	//map.addControl(geolocate, 'top-left');
 	map.addControl(L.mapbox.shareControl(), 'top-left');
-	//map.addControl(L.mapbox.legendControl(), 'bottom-right');
+	map.addControl(L.mapbox.legendControl('https://ideib.caib.es/geoserveis/rest/services/public/GOIB_Fotovo_Eol_IB/MapServer/legend?dynamicLayers=%5B0%5D&f=html'), 'bottom-right');
 	map.addControl(L.control.scale({metric: true, imperial: false}), 'bottom-left');
 
 }
