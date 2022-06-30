@@ -1,6 +1,3 @@
---Query SQL para insertar 2022-06-datos ficticios en la BBDD y poder hacer pruebas con ella. Es necesario añadir los datos para cada tipo.
-
---Inserta datos ficticios para humedad. Previamente vacia la tabla.
 TRUNCATE TABLE w_station.humidity;
 INSERT INTO w_station.humidity (humidity, `date`) VALUES(45, "2022-06-02 01:00:00");
 INSERT INTO w_station.humidity (humidity, `date`) VALUES(65, "2022-06-02 02:00:00");
@@ -29,7 +26,6 @@ INSERT INTO w_station.humidity (humidity, `date`) VALUES(30, "2022-06-03 00:00:0
 INSERT INTO w_station.humidity (humidity, `date`) VALUES(80, "2022-06-03 01:00:00");
 INSERT INTO w_station.humidity (humidity, `date`) VALUES(45, "2022-06-03 02:00:00");
 
---Inserta datos ficticios para presión atmosférica. Previamente vacia la tabla.
 TRUNCATE TABLE w_station.preasure;
 INSERT INTO w_station.preasure (preasure, `date`) VALUES(1010, "2022-06-02 01:00:00");
 INSERT INTO w_station.preasure (preasure, `date`) VALUES(1011, "2022-06-02 02:00:00");
@@ -58,7 +54,6 @@ INSERT INTO w_station.preasure (preasure, `date`) VALUES(1015, "2022-06-03 00:00
 INSERT INTO w_station.preasure (preasure, `date`) VALUES(1013, "2022-06-03 01:00:00");
 INSERT INTO w_station.preasure (preasure, `date`) VALUES(1011, "2022-06-03 02:00:00");
 
---Inserta datos ficticios para temperatura. Previamente vacia la tabla.
 TRUNCATE TABLE w_station.temperature;
 INSERT INTO w_station.temperature (temperature, `date`) VALUES(13.55, "2022-06-02 01:00:00");
 INSERT INTO w_station.temperature (temperature, `date`) VALUES(13.90, "2022-06-02 02:00:00");
@@ -87,7 +82,6 @@ INSERT INTO w_station.temperature (temperature, `date`) VALUES(12.75, "2022-06-0
 INSERT INTO w_station.temperature (temperature, `date`) VALUES(12.05, "2022-06-03 01:00:00");
 INSERT INTO w_station.temperature (temperature, `date`) VALUES(12.45, "2022-06-03 02:00:00");
 
---Inserta datos ficticios para luminosidad. Previamente vacia la tabla.
 TRUNCATE TABLE w_station.brightness;
 INSERT INTO w_station.brightness (brightness, `date`) VALUES(10, "2022-06-02 01:00:00");
 INSERT INTO w_station.brightness (brightness, `date`) VALUES(10, "2022-06-02 02:00:00");

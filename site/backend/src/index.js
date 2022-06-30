@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 var path = require('path');
 const dotenv = require('dotenv')
 const morgan = require('morgan')
@@ -26,6 +27,7 @@ app.set('port', process.env.PORT || PORT)
 // app.use(express.static(path.join(__dirname, 'public')));
 
 //Middlewares
+app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
 // app.use(requestLogger)
