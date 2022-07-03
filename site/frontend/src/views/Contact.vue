@@ -1,7 +1,3 @@
-<script>
-
-</script>
-
 <template>
 	<div class="contact">
 		<h1>Contacto</h1>
@@ -9,8 +5,14 @@
 	</div>
 </template>
 
-<style scoped>
-	.contact {
-
+<script>
+	export default {
+		name: 'Contact',
+		components: {
+		}
 	}
+</script>
+
+<style>
+
 </style>

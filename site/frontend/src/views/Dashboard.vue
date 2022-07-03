@@ -1,7 +1,3 @@
-<script>
-
-</script>
-
 <template>
 	<div class="dashboard">
 		<h1>Dashboard</h1>
@@ -9,7 +5,14 @@
 	</div>
 </template>
 
-<style scoped>
-	.dashboard {
+<script>
+	export default {
+		name: 'Dashboard',
+		components: {
+		}
 	}
+</script>
+
+<style>
+	
 </style>

@@ -6,5 +6,9 @@
 </template>
 
 <script>
-
+	export default {
+		name: 'Brightness',
+		components: {
+		}
+	}
 </script>

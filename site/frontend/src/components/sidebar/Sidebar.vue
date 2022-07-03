@@ -12,7 +12,7 @@
 
 <template>
 	<aside class="sidebar" :style="{ width: sidebarWidth }">
-		<img src="../../assets/Circle-icons-weather.svg" alt="logo vue">
+		<img src="@/assets/Circle-icons-weather.svg" alt="logo vue">
 		<h1>
 			<span v-if="!collapsed">ArduWeather
 			<hr></span>

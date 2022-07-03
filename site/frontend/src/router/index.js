@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
-import About from "../views/About.vue";
-import Dashboard from "../views/Dashboard.vue";
-import Contact from "../views/Contact.vue";
-import MapVue from "../views/Map.vue";
-import Temperature from "../views/Temperature.vue"
-import Humidity from "../views/Humidity.vue"
-import Pressure from "../views/Pressure.vue"
-import Brightness from "../views/Brightness.vue"
+
+import About from "@/views/About.vue";
+import Dashboard from "@/views/Dashboard.vue";
+import Contact from "@/views/Contact.vue";
+import MapVue from "@/views/Map.vue";
+import Temperature from "@/views/Temperature.vue"
+import Humidity from "@/views/Humidity.vue"
+import Pressure from "@/views/Pressure.vue"
+import Brightness from "@/views/Brightness.vue"
 
 const routes = [
   { 
