@@ -138,14 +138,14 @@ async function showCurrentStatus(url){
 	let urlIcon =`http://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png`;
 	let time = convertTime(json.dt);
 	
-	/*$(item).html(`
+	$(item).html(`
 		<div class="content">
 			<div class="col text-center">
 				<b><span class="text-center">${convertTime(json.dt)}</span></b><br>
 				<img src="${urlIcon}" alt="${json.weather[0].description.charAt(0).toUpperCase() + json.weather[0].description.slice(1)}" width="110px"><br>
 				<span class="">${jitem.main.temp}ºC</span>
 			</div>`
-	);*/
+	);
 
 	//Imprime ultimos datos en los cards correspondientes. lastTempData lastHumData lastPressData lastBrigData lastWindData
 	showLatestData(document.getElementsByClassName('lastTempData'), 'temperature', 'ºC', time, json.main.temp);
