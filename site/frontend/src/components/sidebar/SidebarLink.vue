@@ -56,7 +56,6 @@
 	}
 	.link.active {
 		background-color: var(--sidebar-item-active);
-		/* background-color: red; */
 		color: var(--sidebar-bg);
 	}
 	.link .icon {
