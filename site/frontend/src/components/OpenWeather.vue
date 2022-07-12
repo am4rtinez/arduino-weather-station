@@ -7,7 +7,7 @@
 			<div class="card-body">
 				<img :src="weather.weather[0].icon" alt="Icono tiempo">
 				<h4 class="desc">{{ weather.weather.description }}</h4>
-				<p><fa icon="fa-solid fa-temperature-half"/> Temp: {{ weather.main.temp }}&deg;</p>
+				<p><fa icon="fa-solid fa-temperature-half"/> Temp: {{ round(weather.main.temp) }}&deg;</p>
 				<p><fa icon="fa-solid fa-temperature-full" class="max"/> Max: {{ round(weather.main.temp_max) }}&deg;</p>
 				<p><fa icon="fa-solid fa-temperature-quarter" class="min"/> Min: {{ round(weather.main.temp_min) }}&deg;</p>
 				<p><fa icon="fa-solid fa-temperature-half"/> Sensación térmica: {{ round(weather.main.feels_like) }}&deg;</p>
@@ -41,11 +41,9 @@
 		},
 		async mounted(){
 			await API.getWeather().then(response => {
-				console.log(response)
+				// console.log(response)
 				this.weather = response
 				this.weather.weather[0].icon = `http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`
-				// this.ow.weather.description = response.weather[0].description.charAt(0).toUpperCase() + response.weather[0].description.slice(1)
-				// this.ow.weather.icon = `http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`
 				this.mounted = true
 			}),
 			await API.getForecast().then(response => {
@@ -58,9 +56,6 @@
 			},
 			round: function (item) {
 				return Math.round(item)
-			},
-			iconURL: function (icon){
-				return `http://openweathermap.org/img/wn/${icon}@2x.png`
 			}
 		}
 	}
