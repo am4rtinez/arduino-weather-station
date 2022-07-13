@@ -11,17 +11,18 @@
 </script>
 
 <template>
-	<aside class="sidebar duration-300 h-screen p-7 pt-8 bg-zinc-900 relative items-center" :class="sidebarWidth">
-		<span class="absolute cursor-pointer -right-3 bottom-9 w-7 h-7 border-2 border-zinc-900 bg-zinc-50 rounded-full duration-200" @click="toggleSidebar" :class="rotate"> 
-			<fa class="p-1" icon="fa-solid fa-angle-double-left"/>
-		</span>
-		<div class="brand flex items-center gap-xl-4">
-			<img class="w-12 h-12 cursor-pointer block mr-4" src="@/assets/Circle-icons-weather.svg" alt="logo">
-			<h1 class="text-white font-medium text-2xl" v-if="!collapsed">ArduWeather</h1>
+<!-- :style="{ width: sidebarWidth }" -->
+	<nav class="sidebar p-3">
+		<div class="sidebar-header">
+			<img class="logo row mx-auto d-block" src="@/assets/Circle-icons-weather.svg" alt="logo">
+			<h1 class="row" v-if="!collapsed">ArduWeather</h1>
 		</div>
-		<h3 class="mt-6 text-center text-white">Menu</h3>
-		<div class="menu mt-6 text-xl">
-			<SidebarLink class="text-center" to="/" icon="fa-solid fa-table">Dashboard</SidebarLink>
+		<div class="collapse-icon" @click="toggleSidebar" :class="{ 'rotate-180' : collapsed}"> 
+			<fa icon="fa-solid fa-angle-double-left"/>
+		</div>
+		<!-- <h3 class="mt-6 text-center text-white">Menu</h3> -->
+		<!-- <div class="menu">
+			<SidebarLink to="/" icon="fa-solid fa-table">Dashboard</SidebarLink>
 			<SidebarLink to="/temperature" icon="fa-solid fa-temperature-half">Temperatura</SidebarLink>
 			<SidebarLink to="/humidity" icon="fa-solid fa-tint">Humedad</SidebarLink>
 			<SidebarLink to="/pressure" icon="fa-solid fa-gauge">Presión</SidebarLink>
@@ -29,9 +30,8 @@
 			<SidebarLink to="/map" icon="fa-solid fa-map-marked-alt">Mapa</SidebarLink>
 			<SidebarLink to="/contact" icon="fa-solid fa-envelope">Contacto</SidebarLink>
 			<SidebarLink to="/about" icon="fa-solid fa-circle-info">About</SidebarLink>
-		</div>
-
-	</aside>
+		</div> -->
+	</nav>
 </template>
 
 <style>
@@ -40,7 +40,6 @@
 
 <style scoped>
 	/* .sidebar {
-		color: white;
 		background-color: var(--sidebar-bg);
 		float: left;
 		position: fixed;
@@ -52,13 +51,36 @@
 		transition: 0.3s ease;
 		display: flex;
 		flex-direction: column;
+	} */
+
+	.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    background-color: var(--sidebar-bg);
+    color: #fff;
+    transition: all 0.3s;
 	}
 	.sidebar h1 {
 		height: 2.5em;
 	}
 
-	.collapse-icon:hover {
-		color: var(--sidebar-color-item-hover);
+	.brand {
+		display: flex;
+	}
+
+	.logo {
+		width: 3rem;
+		height: 3rem;
+		margin-right: 1rem;
+	}
+
+	.brand h1 {
+		font-size: 1.5rem;
+    line-height: 2rem;
+		color: white;
 	}
 
 	h3 {
@@ -67,11 +89,28 @@
 		font-size: 0.875rem;
 		margin-bottom: 0.5rem;
 		text-transform: uppercase;
-	} */
+	}
+
 	.collapse-icon {
-		color: red;
+		width: 1.75rem;
+		height: 1.75rem;
+		background-color: white;
+		border: 1px solid var(--sidebar-bg);
+		border-radius: 9999px;
+		cursor: pointer;
+		position: absolute;
+		bottom: 2.25rem;
+		right: -0.75rem;
+		color: var(--sidebar-bg);
 		transition: 0.2s linear;
 	}
+	.collapse-icon svg {
+		padding: .3rem;
+	}
+	.collapse-icon:hover {
+		color: var(--sidebar-color-item-hover);
+	}
+
 	.rotate-180 {
 		transform: rotate(180deg);
 		transition: 0.2s linear;

@@ -16,10 +16,11 @@
 </script>
 
 <template>
-  <router-link :to="to" class="link" :class="{ active: isActive }">
-    <fa :icon="icon" class="icon"/>
+  <router-link class="link" 
+		:to="to" :class="{ active: isActive }">
+    <fa :icon="icon" class="icon text-center text-xl"/>
     <transition name="fade">
-      <span v-if="!collapsed">
+      <span class="text-center text-md" v-if="!collapsed">
         <slot />
       </span>
     </transition>
@@ -52,15 +53,14 @@
 	.link:hover {
 		background-color: var(--sidebar-bg-item-hover);
 		color: var(--sidebar-color-item-hover);
-		margin-right: -0.5em;
 	}
 	.link.active {
 		background-color: var(--sidebar-item-active);
 		color: var(--sidebar-bg);
 	}
-	.link .icon {
+	/* .link .icon {
 		flex-shrink: 0;
 		width: 25px;
 		margin-right: 10px;
-	}
+	} */
 </style>

@@ -1,9 +1,9 @@
 <script>
-	import sidebar from '@/components/sidebar/Sidebar.vue'
+	import Sidebar from '@/components/sidebar/Sidebar.vue'
 	import { sidebarWidth } from '@/components/sidebar/state'
 
 	export default {
-		components: { sidebar },
+		components: { Sidebar },
 		setup () {
 			return { sidebarWidth }
 		}
@@ -11,17 +11,17 @@
 </script>
 
 <template>
-	<div class="flex">
-		<sidebar class="" />
+	<div class="wrapper">
+		<Sidebar />
 		<!-- <div class="content p-7 flex-1" :style="{ 'margin-left': sidebarWidth }"> -->
-		<div class="content p-7 flex-1">
+		<div class="content">
 			<router-view />
 		</div>
 	</div>
 </template>
 
 <style>
-	/* :root {
+	:root {
 		--color1: #EDE6DB;
 		--color-light: #6df7a2;
 		--color2: #417D7A;
@@ -38,20 +38,11 @@
 		--dark-alt: #334155;
 		--light: #f1f5f9;
 
-		--sidebar-bg: #222831;
+		--sidebar-bg: #111827;
 		--sidebar-bg-item-hover: #393E46;
 		--sidebar-color-item-hover:var(--color-light);
 		--sidebar-item-active: #fff;
 	}
-
-
-	body {
-		box-sizing: border-box;
-	}
-
-	#logo{
-		width: 40%;
-	} */
 
 	#app {
 		font-family: 'Roboto', Avenir, Helvetica, Arial, sans-serif;
@@ -59,5 +50,19 @@
 		-moz-osx-font-smoothing: grayscale;
 		text-align: center;
 		color: #2c3e50;
+		display: flex;
+	}
+
+	body {
+		box-sizing: border-box;
+	}
+
+	.wrapper {
+		display: flex;
+    width: 100%;
+	}
+
+	#logo{
+		width: 40%;
 	}
 </style>
