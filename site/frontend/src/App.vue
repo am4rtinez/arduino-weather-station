@@ -11,16 +11,17 @@
 </script>
 
 <template>
-	<div class="page">
-		<sidebar />
-		<div class="content" :style="{ 'margin-left': sidebarWidth }">
+	<div class="flex">
+		<sidebar class="" />
+		<!-- <div class="content p-7 flex-1" :style="{ 'margin-left': sidebarWidth }"> -->
+		<div class="content p-7 flex-1">
 			<router-view />
 		</div>
 	</div>
 </template>
 
 <style>
-	:root {
+	/* :root {
 		--color1: #EDE6DB;
 		--color-light: #6df7a2;
 		--color2: #417D7A;
@@ -41,18 +42,8 @@
 		--sidebar-bg-item-hover: #393E46;
 		--sidebar-color-item-hover:var(--color-light);
 		--sidebar-item-active: #fff;
-		/* --sidebar-bg-color: #2f855a; */
-		/* --sidebar-item-active: #276749; */
 	}
 
-	#app {
-		font-family: 'Roboto', Avenir, Helvetica, Arial, sans-serif;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-		text-align: center;
-		color: #2c3e50;
-		margin-top: 60px;
-	}
 
 	body {
 		box-sizing: border-box;
@@ -60,6 +51,13 @@
 
 	#logo{
 		width: 40%;
-	}
+	} */
 
+	#app {
+		font-family: 'Roboto', Avenir, Helvetica, Arial, sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-align: center;
+		color: #2c3e50;
+	}
 </style>
