@@ -13,9 +13,10 @@
 <template>
 	<div class="wrapper">
 		<Sidebar />
-		<!-- <div class="content p-7 flex-1" :style="{ 'margin-left': sidebarWidth }"> -->
-		<div class="content">
-			<router-view />
+		<div class="">
+			<!-- <router-view /> -->
+			<h4>Content Area...</h4>
+			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero doloribus laudantium consequatur soluta odio distinctio minus est modi quisquam error porro quis nisi pariatur consequuntur placeat quae quidem, totam repellendus!</p>
 		</div>
 	</div>
 </template>
@@ -50,19 +51,9 @@
 		-moz-osx-font-smoothing: grayscale;
 		text-align: center;
 		color: #2c3e50;
-		display: flex;
 	}
 
 	body {
 		box-sizing: border-box;
-	}
-
-	.wrapper {
-		display: flex;
-    width: 100%;
-	}
-
-	#logo{
-		width: 40%;
 	}
 </style>
