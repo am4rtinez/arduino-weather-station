@@ -1,3 +1,13 @@
+<template>
+	<router-link :to="to" :class="{ active: isActive }">
+		<!-- <fa :icon="icon" /> -->
+		<span class="material-symbols-outlined icon">{{icon}}</span>
+		<span class="text" v-if="!collapsed">
+				<slot />
+		</span>
+	</router-link>
+</template>
+
 <script>
 	import { computed } from 'vue'
 	import { useRoute } from 'vue-router'
@@ -15,18 +25,6 @@
 	}
 </script>
 
-<template>
-  <router-link class="link" 
-		:to="to" :class="{ active: isActive }">
-    <fa :icon="icon" class="icon text-center text-xl"/>
-    <transition name="fade">
-      <span class="text-center text-md" v-if="!collapsed">
-        <slot />
-      </span>
-    </transition>
-  </router-link>
-</template>
-
 <style scoped>
 	.fade-enter-active,
 	.fade-leave-active {
@@ -36,6 +34,40 @@
 	.fade-leave-to {
 		opacity: 0;
 	}
+
+	.button {
+		display: flex;
+		align-items: center;
+		text-decoration: none;
+		transition: 0.2s ease-in-out;
+		padding: 0.5rem 2rem;
+		color: white;
+	}
+	.button:hover {
+		background-color: var(--dark-alt);
+	}
+
+	.active {
+		background-color: var(--dark-alt);
+		color: var(--color-light);
+		border-right: 4px solid var(--color-light);
+	}
+
+	.active .icon {
+		color: var(--color-light);
+	}
+
+	.text {
+		margin-left: 1em;
+	}
+
+	.material-symbols-outlined,
+	.material-icons {
+		font-size: 1.5rem;
+		color: var(--light);
+		transition: 0.2s ease-in-out;
+	}
+	/* 
 	.link {
 		display: flex;
 		align-items: center;
@@ -57,10 +89,13 @@
 	.link.active {
 		background-color: var(--sidebar-item-active);
 		color: var(--sidebar-bg);
-	}
-	/* .link .icon {
+	} 
+	*/
+	/* 
+	.link .icon {
 		flex-shrink: 0;
 		width: 25px;
 		margin-right: 10px;
-	} */
+	} 
+	*/
 </style>

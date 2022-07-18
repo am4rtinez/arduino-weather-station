@@ -13,15 +13,14 @@
 <template>
 	<div class="wrapper">
 		<Sidebar />
-		<div class="">
-			<!-- <router-view /> -->
-			<h4>Content Area...</h4>
-			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero doloribus laudantium consequatur soluta odio distinctio minus est modi quisquam error porro quis nisi pariatur consequuntur placeat quae quidem, totam repellendus!</p>
+		<div class="content">
+			<router-view />
 		</div>
 	</div>
 </template>
 
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 	:root {
 		--color1: #EDE6DB;
 		--color-light: #6df7a2;
@@ -45,15 +44,33 @@
 		--sidebar-item-active: #fff;
 	}
 
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		font-family: 'Ubuntu', sans-serif;
+	}
+
 	#app {
-		font-family: 'Roboto', Avenir, Helvetica, Arial, sans-serif;
+		/* font-family: 'Roboto', Avenir, Helvetica, Arial, sans-serif; */
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 		text-align: center;
 		color: #2c3e50;
 	}
 
-	body {
-		box-sizing: border-box;
+	.wrapper {
+		display: flex;
+		height: 100%;
 	}
+
+	.content {
+		background-color: white;
+		min-height: 100%;
+		flex-grow: 9;
+		padding: 40px;
+		transform: translate3d(0,0,0);
+		transition: transform .3s;
+	}
+
 </style>
