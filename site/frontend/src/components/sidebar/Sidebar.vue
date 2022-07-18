@@ -1,3 +1,26 @@
+<template>
+	<aside :style="{ width: sidebarWidth }" :collapsed="collapsed">
+		<a href="/" class="header">
+			<img class="logo" src="@/assets/Circle-icons-weather.svg" alt="logo">
+		</a>
+		<h3 v-if="!collapsed">ArduWeather</h3>
+		<hr>
+		<div class="menu">
+			<SidebarLink to="/" icon="dashboard" class="button">Dashboard</SidebarLink>
+			<SidebarLink to="/temperature" icon="device_thermostat" class="button">Temperatura</SidebarLink>
+			<SidebarLink to="/humidity" icon="water_drop" class="button">Humedad</SidebarLink>
+			<SidebarLink to="/pressure" icon="airwave" class="button">Presion</SidebarLink>
+			<SidebarLink to="/brightness" icon="lightbulb" class="button">Luminosidad</SidebarLink>
+			<SidebarLink to="/map" icon="explore" class="button">Mapa</SidebarLink>
+			<SidebarLink to="/contact" icon="mail" class="button">Contacto</SidebarLink>
+			<SidebarLink to="/about" icon="info" class="button">About</SidebarLink>
+		</div>
+		<div class="collapse-icon" @click="toggleSidebar" :class="{ 'rotate-180' : collapsed}"> 
+			<fa icon="fa-solid fa-angle-double-left"/>
+		</div>
+	</aside>
+</template>
+
 <script>
 	import SidebarLink from './SidebarLink.vue'
 	import { collapsed, toggleSidebar, sidebarWidth, rotate } from './state'
@@ -9,43 +32,6 @@
 		}
 	}
 </script>
-
-<template>
-	<!-- 
-		<SidebarLink to="/" icon="fa-solid fa-table" class="nav-link text-white">Dashboard</SidebarLink>
-		<SidebarLink to="/temperature" icon="fa-solid fa-temperature-half">Temperatura</SidebarLink>
-		<SidebarLink to="/humidity" icon="fa-solid fa-tint">Humedad</SidebarLink>
-		<SidebarLink to="/pressure" icon="fa-solid fa-gauge">Presión</SidebarLink>
-		<SidebarLink to="/brightness" icon="fa-solid fa-lightbulb">Luminosidad</SidebarLink>
-		<SidebarLink to="/map" icon="fa-solid fa-map-marked-alt">Mapa</SidebarLink>
-		<SidebarLink to="/contact" icon="fa-solid fa-envelope">Contacto</SidebarLink>
-		<SidebarLink to="/about" icon="fa-solid fa-circle-info">About</SidebarLink>
-	-->
-	<aside :style="{ width: sidebarWidth }">
-		<a href="/" class="header">
-			<img class="logo" src="@/assets/Circle-icons-weather.svg" alt="logo">
-		</a>
-		<h3 v-if="!collapsed">ArduWeather</h3>
-		<hr>
-		<div class="menu">
-			<SidebarLink to="/" icon="dashboard" class="button">Dashboard</SidebarLink>
-			<SidebarLink to="/temperature" icon="device_thermostat" class="button">Temperatura</SidebarLink>
-			<SidebarLink to="/humidity" icon="humidity_high" class="button">Humedad</SidebarLink>
-			<SidebarLink to="/pressure" icon="airwave" class="button">Presion</SidebarLink>
-			<SidebarLink to="/brightness" icon="lightbulb" class="button">Luminosidad</SidebarLink>
-			<SidebarLink to="/map" icon="map" class="button">Mapa</SidebarLink>
-			<SidebarLink to="/contact" icon="mail" class="button">Contacto</SidebarLink>
-			<SidebarLink to="/about" icon="info" class="button">About</SidebarLink>
-		</div>
-		<div class="collapse-icon" @click="toggleSidebar" :class="{ 'rotate-180' : collapsed}"> 
-			<fa icon="fa-solid fa-angle-double-left"/>
-		</div>
-	</aside>
-</template>
-
-<style>
-	
-</style>
 
 <style scoped>
 	aside {
@@ -68,11 +54,12 @@
 		margin: 0 0 1em 0;
 	}
 
-	aside hr {
+	aside hr{
 		width: 90%;
 		margin-right: auto !important;
 		margin-left: auto !important;
 	}
+
 	.menu {
 		margin-top: 3rem;
 	}

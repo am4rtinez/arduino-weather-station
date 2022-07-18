@@ -1,7 +1,7 @@
 <template>
 	<router-link :to="to" :class="{ active: isActive }">
 		<!-- <fa :icon="icon" /> -->
-		<span class="material-symbols-outlined icon">{{icon}}</span>
+		<span class="material-symbols-rounded icon">{{icon}}</span>
 		<span class="text" v-if="!collapsed">
 				<slot />
 		</span>

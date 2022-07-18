@@ -20,7 +20,8 @@
 </template>
 
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+	/* @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap'); */
+	@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;1,100;1,200;1,300&display=swap');
 	:root {
 		--color1: #EDE6DB;
 		--color-light: #6df7a2;
@@ -38,6 +39,7 @@
 		--dark-alt: #334155;
 		--light: #f1f5f9;
 
+		--bg-color: #edf0ee;
 		--sidebar-bg: #111827;
 		--sidebar-bg-item-hover: #393E46;
 		--sidebar-color-item-hover:var(--color-light);
@@ -48,7 +50,7 @@
 		margin: 0;
 		padding: 0;
 		box-sizing: border-box;
-		font-family: 'Ubuntu', sans-serif;
+		font-family: 'Fira Sans', sans-serif;
 	}
 
 	#app {
@@ -65,12 +67,25 @@
 	}
 
 	.content {
-		background-color: white;
+		background-color: var(--bg-color);
 		min-height: 100%;
-		flex-grow: 9;
+		flex-grow: 10;
 		padding: 40px;
 		transform: translate3d(0,0,0);
 		transition: transform .3s;
+	}
+
+	.flex {
+		display: flex;
+		align-items: center;
+	}
+
+	.row {
+		flex-direction: row;
+	}
+
+	.column {
+		flex-direction: column;
 	}
 
 </style>
