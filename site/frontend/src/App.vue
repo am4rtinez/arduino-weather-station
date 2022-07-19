@@ -70,10 +70,18 @@
 		background-color: var(--bg-color);
 		min-height: 100%;
 		flex-grow: 10;
-		padding: 40px;
+		padding: 1em;
 		transform: translate3d(0,0,0);
 		transition: transform .3s;
+		border: 1px solid blue;
 	}
+
+	.container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: .5rem;
+}
 
 	.flex {
 		display: flex;
@@ -81,11 +89,24 @@
 	}
 
 	.row {
+		display: flex;
 		flex-direction: row;
+		flex-wrap: wrap;
+		width: 100%;
+		gap: 1em;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.column {
+		display: flex;
 		flex-direction: column;
+		flex-basis: 100%;
+		flex: 1;
+		gap: .8em;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
 	}
 
 </style>

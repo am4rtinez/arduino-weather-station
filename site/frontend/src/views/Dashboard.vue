@@ -1,5 +1,5 @@
 <template>
-	<div class="dashboard">
+	<div class="container">
 		<!-- <h1>Dashboard</h1>
 		<p>Dashboard donde se mostraran las temperaturas</p> -->
 		<OpenWeatherVue icon="fa-solid fa-sync" />
@@ -16,6 +16,6 @@
 	}
 </script>
 
-<style>
-	
+<style scoped>
+
 </style>
