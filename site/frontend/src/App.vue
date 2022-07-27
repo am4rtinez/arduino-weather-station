@@ -73,7 +73,6 @@
 		padding: 1em;
 		transform: translate3d(0,0,0);
 		transition: transform .3s;
-		border: 1px solid blue;
 	}
 
 	.container {

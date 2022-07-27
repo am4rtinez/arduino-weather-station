@@ -6,7 +6,7 @@
 		<h3 v-if="!collapsed">ArduWeather</h3>
 		<hr>
 		<div class="menu">
-			<SidebarLink to="/" icon="dashboard" class="button">Dashboard</SidebarLink>
+			<SidebarLink to="/" icon="space_dashboard" class="button">Dashboard</SidebarLink>
 			<SidebarLink to="/temperature" icon="device_thermostat" class="button">Temperatura</SidebarLink>
 			<SidebarLink to="/humidity" icon="water_drop" class="button">Humedad</SidebarLink>
 			<SidebarLink to="/pressure" icon="airwave" class="button">Presion</SidebarLink>

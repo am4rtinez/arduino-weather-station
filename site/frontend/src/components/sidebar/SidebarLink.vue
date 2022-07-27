@@ -61,12 +61,14 @@
 		margin-left: 1em;
 	}
 
-	.material-symbols-outlined,
-	.material-icons {
-		font-size: 1.5rem;
-		color: var(--light);
-		transition: 0.2s ease-in-out;
+	.material-symbols-rounded {
+		font-variation-settings:
+		'FILL' 1,
+		'wght' 300,
+		'GRAD' 0,
+		'opsz' 32
 	}
+
 	/* 
 	.link {
 		display: flex;
